@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+        <title>my.e-ok</title>
+		<link href="css/reset.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/jquery.mobile-1.4.3.min.css" rel="stylesheet" />
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery.mobile-1.4.3.min.js"></script>
+    </head>
+    <body class="ui-mobile-viewport ui-overlay-c">
+        <div data-role="page" id="login", data-theme="a">
+            <div data-role="content" class="ui-content" role="main">
+                <div class="melding" onclick="hideMelding()">
+                </div>
+                <div class="headerLogo">
+                    <img src="img/my.e-ok_Logo.png" />
+                </div>
+                <div id="containerLogin">
+                    <input type="email" id="loginInput" placeholder="Login" />
+                    <input type="password" id="paswoordInput" placeholder="Paswoord" />
+                    <input type="button" id="inloggen" class="btnInloggen" value="Inloggen" data-role="button" />
+                </div>
+                <div id="containerLoading">
+                    <img src="img/gif-load.gif" />
+                </div>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <img src="img/liantis_inverted.svg" class="headerLogo-footer" alt="liantis-logo" />
+            </div>
+        </div>
+		
+		<script src="js/DatabaseConnection.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+		<script>
+			var APIVersion = '3';
+
+			var timeout;
+			// Als de pagina geladen is kijken of er een 'cookie' is opgeslaan met een eerder ingelogde gebruikerId
+			// Indien wel --> login overslaan en met gegevens van vorige gebruiker blijven werken
+			$(document).ready(function () {
+			    var mdwID = window.localStorage.getItem("mdwID");
+			    var miRol = window.localStorage.getItem("miRol");
+
+			    if (mdwID != null && miRol != null) {
+			        $.ajax({
+			            headers: { 'Access-Control-Allow-Origin': '*' },
+			            url: url + 'api/User/getVersionInfo/?apiVersion=' + APIVersion,
+			            cache: false,
+			            type: 'GET',
+			            contentType: 'application/json; charset=utf-8',
+			            success: function (data) {
+			                window.location.href = "Home.html#home";
+			            },
+			            error: function (e) {
+			                if (e.responseJSON == undefined || e.responseJSON == null)
+			                    melding("U heeft geen internet connectie.", 3000, 'error');
+			                else
+			                    melding(e.responseJSON, 5000, 'error');
+			            }
+			        });
+			    }
+			});
+
+			// Een melding aan de gebruiker meegeven
+			// Bericht = tekst in de melding
+			// fadeDelay = tijd dat het bericht zichtbaar is
+			// status = wat voor soort melding is het? error (rood), warning (geel), success (groen)
+			function melding(bericht, fadeDelay, status) {
+				switch (status) {
+					case "error":
+						$('.melding').css('background-color', '#ff5757');
+						break;
+					case "warning":
+						$('.melding').css('background-color', '#ffdd57');
+						break;
+					case "success":
+						$('.melding').css('background-color', '#57dd57');
+						break;
+				}
+				$('.melding').text(bericht);
+				$('.melding').fadeIn();
+				window.clearTimeout(timeout);
+				timeout = setTimeout(function () { $('.melding').fadeOut(); }, fadeDelay);
+			}
+
+			// Melding verbergen wanneer er op geklikt wordt
+			function hideMelding() {
+				clearTimeout(timeout);
+				$('.melding').fadeOut();
+			}
+
+			$("#inloggen").on('click', function () {
+			    $('#containerLogin').css('display', 'none');
+			    $('#containerLoading').css('display', 'block');
+
+			    login();
+			});
+
+			function login() {
+				console.log('login');
+				var user = {
+					UserName: $("#loginInput").val(),
+					Paswoord: $("#paswoordInput").val(),
+					MedewerkerID: 0, Role: ''
+				};
+
+				$.ajax({
+					headers: { 'Access-Control-Allow-Origin': "*" },
+					url: url + 'api/user/Login?apiVersion=' + APIVersion,
+					cache: false,
+					type: 'POST',
+					contentType: 'application/json; charset=utf-8',
+					data: JSON.stringify(user),
+					success: function (data) {
+						window.localStorage.setItem("miRol", data.split('@#@')[1])
+						window.localStorage.setItem("mdwID", data.split('@#@')[0]);
+						window.location.href = "Home.html#home";
+					},
+					error: function (e) {
+						$('#containerLogin').css('display', 'block');
+						$('#containerLoading').css('display', 'none');
+						if (e.responseJSON == undefined || e.responseJSON == null)
+							melding("U heeft geen internet connectie.", 3000, 'error');
+						else
+							melding(e.responseJSON, 5000, 'error');
+					}
+				});
+			}
+		</script>
+    </body>
+</html>

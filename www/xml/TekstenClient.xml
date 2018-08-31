@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuratie>
+  <KeyValuePairs>
+
+  </KeyValuePairs>
+  <Vertalingen>
+    <!-- Statische teksten -->
+    <Vertaling class="lblMenuHome">
+      <nl>Verlofsaldo</nl>
+      <en>Leave balance</en>
+      <fr>Résumé crédits</fr>
+    </Vertaling>
+    <Vertaling class="lblMenuVerlof">
+      <nl>Verlof aanvragen</nl>
+      <en>Leave requests</en>
+      <fr>Demander congé</fr>
+    </Vertaling>
+    <Vertaling class="lblMenuHistoriek">
+      <nl>Historiek</nl>
+      <en>History</en>
+      <fr>Histoire</fr>
+    </Vertaling>
+    <Vertaling class="lblMenuInst">
+      <nl>Taalkeuze</nl>
+      <en>Language</en>
+      <fr>Langue</fr>
+    </Vertaling>
+    <Vertaling class="lblMenuLogout">
+      <nl>Uitloggen</nl>
+      <en>Logout</en>
+      <fr>Déconnexion</fr>
+    </Vertaling>
+    <Vertaling class="txaRedenAanvr">
+      <nl>Reden van afwezigheid:</nl>
+      <en>Reason for absence:</en>
+      <fr>Raison d'absence:</fr>
+    </Vertaling>
+    <Vertaling class="lblDatVanAanvr">
+      <nl>Datum van</nl>
+      <en>From</en>
+      <fr>De</fr>
+    </Vertaling>
+    <Vertaling class="lblDatTotAanvr">
+      <nl>Datum tot</nl>
+      <en>Up to</en>
+      <fr>Jusqu'au</fr>
+    </Vertaling>
+    <Vertaling class="btnDetailDagenAanvr" isButton="1">
+      <nl>
+        Verder&lt;input data-theme=&quot;b&quot; id=&quot;btnDetailDagen&quot; class=&quot;btnDetailDagenAanvr&quot; type=&quot;submit&quot; value=&quot;Verder&quot; /&gt;
+      </nl>
+      <en>
+        Continue&lt;input data-theme=&quot;b&quot; id=&quot;btnDetailDagen&quot; class=&quot;btnDetailDagenAanvr&quot; type=&quot;submit&quot; value=&quot;Verder&quot; /&gt;
+      </en>
+      <fr>
+        Ensuite&lt;input data-theme=&quot;b&quot; id=&quot;btnDetailDagen&quot; class=&quot;btnDetailDagenAanvr&quot; type=&quot;submit&quot; value=&quot;Verder&quot; /&gt;
+      </fr>
+    </Vertaling>
+    <Vertaling class="tblPCodes1">
+      <nl>Beginsaldo</nl>
+      <en>Starting balance</en>
+      <fr>Solde de commencement</fr>
+    </Vertaling>
+    <Vertaling class="tblPCodes2">
+      <nl>Gebruikt</nl>
+      <en>Used</en>
+      <fr>Utilisé</fr>
+    </Vertaling>
+    <Vertaling class="tblPCodes3">
+      <nl>Aangevraagd</nl>
+      <en>Requested</en>
+      <fr>Demandé</fr>
+    </Vertaling>
+    <Vertaling class="tblPCodes4">
+      <nl>Beschikbaar</nl>
+      <en>Available</en>
+      <fr>Disponible</fr>
+    </Vertaling>
+    <Vertaling class="tblPCodes5">
+      <nl>Beschikbare uren</nl>
+      <en>Hours available</en>
+      <fr>Heures disponibles</fr>
+    </Vertaling>
+    <Vertaling class="tblPCodes7">
+      <nl>Geldig vanaf</nl>
+      <en>Valid from</en>
+      <fr>Valable de</fr>
+    </Vertaling>
+    <Vertaling class="tblPCodes6">
+      <nl>Geldig tot</nl>
+      <en>Valid until</en>
+      <fr>Valable jusqu'à</fr>
+    </Vertaling>
+    <Vertaling class="tblHist1">
+      <nl>Van</nl>
+      <en>From</en>
+      <fr>De</fr>
+    </Vertaling>
+    <Vertaling class="tblHist2">
+      <nl>Tot en met</nl>
+      <en>Up to and including</en>
+      <fr>Jusqu'au</fr>
+    </Vertaling>
+    <Vertaling class="tblHist3">
+      <nl>Aantal dagen</nl>
+      <en>Number of days</en>
+      <fr>Nombre de jours</fr>
+    </Vertaling>
+    <Vertaling class="tblHist4">
+      <nl>Aangevraagd op</nl>
+      <en>Requested on</en>
+      <fr>Demandé le</fr>
+    </Vertaling>
+    <Vertaling class="tblHist5">
+      <nl>Status</nl>
+      <en>Status</en>
+      <fr>Statut</fr>
+    </Vertaling>
+    <Vertaling class="tblHist6">
+      <nl>Behandeld door</nl>
+      <en>Treated by</en>
+      <fr>Traitée par</fr>
+    </Vertaling>
+    <Vertaling class="lblAanvraagVanBeh">
+      <nl>Aanvraag van: </nl>
+      <en>Request of: </en>
+      <fr>Demande de: </fr>
+    </Vertaling>
+    <Vertaling class="lblFunctieBeh">
+      <nl>Functie: </nl>
+      <en>Function: </en>
+      <fr>Fonction: </fr>
+    </Vertaling>
+    <Vertaling class="lblAfdBeh">
+      <nl>Afdeling: </nl>
+      <en>Department: </en>
+      <fr>Departement: </fr>
+    </Vertaling>
+    <Vertaling class="lblRedenBeh">
+      <nl>Reden (optioneel bij goedkeuren):</nl>
+      <en>Reason (optional on approval):</en>
+      <fr>Raison (facultative en approuvant):</fr>
+    </Vertaling>
+    <vertaling class="btnGoedkeuren" isButton="1">
+      <nl>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnGoedkeuren&quot; class=&quot;btnGoedkeuren&quot; type=&quot;submit&quot; value=&quot;Goedkeuren&quot; /&gt;Goedkeuren
+      </nl>
+      <en>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnGoedkeuren&quot; class=&quot;btnGoedkeuren&quot; type=&quot;submit&quot; value=&quot;Approve request&quot; /&gt;Approve request
+      </en>
+      <fr>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnGoedkeuren&quot; class=&quot;btnGoedkeuren&quot; type=&quot;submit&quot; value=&quot;Approuver la demande&quot; /&gt;Approuver la demande
+      </fr>
+    </vertaling>
+    <Vertaling class="btnAfkeuren" isButton="1">
+      <nl>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnAfkeuren&quot; class=&quot;btnAfkeuren&quot; type=&quot;submit&quot; value=&quot;Afkeuren&quot; /&gt;Afkeuren
+      </nl>
+      <en>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnAfkeuren&quot; class=&quot;btnAfkeuren&quot; type=&quot;submit&quot; value=&quot;Disapprove request&quot; /&gt;Disapprove request
+      </en>
+      <fr>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnAfkeuren&quot; class=&quot;btnAfkeuren&quot; type=&quot;submit&quot; value=&quot;Demande déclarée impropre&quot; /&gt;Demande déclarée impropre
+      </fr>
+    </Vertaling>
+    <Vertaling class="btnBehandelAndereAanvr" isButton="1">
+      <nl>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnBehandelAndereAanvr&quot; class=&quot;btnBehandelAndereAanvr&quot; type=&quot;submit&quot; value=&quot;Andere aanvraag behandelen&quot; /&gt;Andere aanvraag behandelen
+      </nl>
+      <en>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnBehandelAndereAanvr&quot; class=&quot;btnBehandelAndereAanvr&quot; type=&quot;submit&quot; value=&quot;Deal with another application&quot; /&gt;Deal with another application
+      </en>
+      <fr>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnBehandelAndereAanvr&quot; class=&quot;btnBehandelAndereAanvr&quot; type=&quot;submit&quot; value=&quot;Traiter une autre demande&quot; /&gt;Traiter une autre demande
+      </fr>
+    </Vertaling>
+    <Vertaling class="btnAllesGoedkeuren" isButton="1">
+      <nl>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnAllesGoedkeuren&quot; class=&quot;btnAllesGoedkeuren&quot; type=&quot;submit&quot; value=&quot;Alles goedkeuren&quot; /&gt;Alles goedkeuren
+      </nl>
+      <en>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnAllesGoedkeuren&quot; class=&quot;btnAllesGoedkeuren&quot; type=&quot;submit&quot; value=&quot;Approve all&quot; /&gt;Approve all
+      </en>
+      <fr>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnAllesGoedkeuren&quot; class=&quot;btnAllesGoedkeuren&quot; type=&quot;submit&quot; value=&quot;Approuver tous&quot; /&gt;Approuver tous
+      </fr>
+    </Vertaling>
+    <Vertaling class="btnConfAanvrNo" isButton="1">
+      <nl>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnConfAanvrNo&quot; class=&quot;btnConfAanvrNo&quot; type=&quot;submit&quot; value=&quot;Nee&quot; /&gt;Nee
+      </nl>
+      <en>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnConfAanvrNo&quot; class=&quot;btnConfAanvrNo&quot; type=&quot;submit&quot; value=&quot;No&quot; /&gt;No
+      </en>
+      <fr>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnConfAanvrNo&quot; class=&quot;btnConfAanvrNo&quot; type=&quot;submit&quot; value=&quot;Non&quot; /&gt;Non
+      </fr>
+    </Vertaling>
+    <Vertaling class="btnConfAanvrYes" isButton="1">
+      <nl>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnConfAanvrYes&quot; class=&quot;btnConfAanvrYes&quot; type=&quot;submit&quot; value=&quot;Ja&quot; /&gt;Ja
+      </nl>
+      <en>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnConfAanvrYes&quot; class=&quot;btnConfAanvrYes&quot; type=&quot;submit&quot; value=&quot;Yes&quot; /&gt;Yes
+      </en>
+      <fr>
+        &lt;input data-theme=&quot;b&quot; id=&quot;btnConfAanvrYes&quot; class=&quot;btnConfAanvrYes&quot; type=&quot;submit&quot; value=&quot;Oui&quot; /&gt;Oui
+      </fr>
+    </Vertaling>
+    <Vertaling class="txtConfirmAanvr">
+      <nl>Weet je zeker dat je alle aanvragen wilt goedkeuren?</nl>
+      <en>Are you sure you want to approve every requested leave?</en>
+      <fr>Est tu certaine que vous voulez Approuver tous?</fr>
+    </Vertaling>
+    <Vertaling class="lblRedenAanvraagMdw">
+      <nl>Reden aanvraag:</nl>
+      <en>Reason request:</en>
+      <fr>Raison demande:</fr>
+    </Vertaling>
+    <Vertaling class="lblMenuAanvragen">
+      <nl>Aanvragen behandelen</nl>
+      <en>Deal with requests</en>
+      <fr>Traiter demandes</fr>
+    </Vertaling>
+
+    <!-- Meldingen -->
+    <Melding class="GeenHistoriek">
+      <nl>Er is geen historiek beschikbaar.</nl>
+      <en>There is no history available.</en>
+      <fr>Il n'y a pas de données disponibles.</fr>
+    </Melding>
+    <Melding class="GeenSaldi">
+      <nl>Er zijn geen saldi beschikbaar.</nl>
+      <en>There is no data available.</en>
+      <fr>Il n'y a pas de données disponibles.</fr>
+    </Melding>
+    <Melding class="AlleVeldenInvullen">
+      <nl>Gelieve alle velden in te vullen.</nl>
+      <en>Please fill in all the fields.</en>
+      <fr>Remplir tous les champs s'il vous plaît.</fr>
+    </Melding>
+    <Melding class="GeenAanvragen">
+      <nl>Je hebt, op dit moment, geen te behandelen aanvragen.</nl>
+      <en>At this moment you have no applications to handle.</en>
+      <fr>Vous n'avez pas de demandes de congé à traiter en ce moment.</fr>
+    </Melding>
+    <Melding class="GeenRedenAfkeuren">
+      <nl>Gelieve een reden voor afkeuren van het verlof te vermelden.</nl>
+      <en>Please give a reason for rejecting the state leave.</en>
+      <fr>Veuillez indiquer une raison pour le refus du congé.</fr>
+    </Melding>
+    <Melding class="OnvoldoendeVerlof">
+      <nl>Je beschikt niet over genoeg verlofuren om verlof aan te vragen voor deze periode.</nl>
+      <en>You do not have enough leave remaining to submit a request for the selected period.</en>
+      <fr>Je beschikt niet over genoeg verlofuren om verlof aan te vragen voor deze periode.</fr>
+    </Melding>
+    <Melding class="VerschJaren">
+      <nl>De periode die je selecteerde loopt over verschillende jaren. Gelieve de periode op te splitsen per jaar.</nl>
+      <en>The period you selected contains days from different years. Please split this period in a different request for each year.</en>
+      <fr>De periode die je selecteerde loopt over verschillende jaren. Gelieve de periode op te splitsen per jaar.</fr>
+    </Melding>
+
+    <!-- Dynamische teksten -->
+    <DynamischeTekst class="AantalUur">
+      <nl>Aantal uur</nl>
+      <en>Number of hours</en>
+      <fr>Nombre d'heurs</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="Dagdeel">
+      <nl>Dagdeel</nl>
+      <en>Part of the day</en>
+      <fr>Patrie du jour</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="Dag">
+      <nl>dag</nl>
+      <en>day</en>
+      <fr>jour</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="Voormiddag">
+      <nl>voormiddag</nl>
+      <en>AM</en>
+      <fr>matinée</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="Namiddag">
+      <nl>namiddag</nl>
+      <en>PM</en>
+      <fr>après-midi</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="Vanaf">
+      <nl>Vanaf</nl>
+      <en>From</en>
+      <fr>De</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="Tot">
+      <nl>Tot en met</nl>
+      <en>Up to and including</en>
+      <fr>Jusqu'au</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="AantDagen">
+      <nl>Aantal dagen</nl>
+      <en>Number of days</en>
+      <fr>Nombre de jours</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="DteAanvraag">
+      <nl>Gevraagd op</nl>
+      <en>Asked</en>
+      <fr>Demandé le</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="Behandelen">
+      <nl>Behandelen</nl>
+      <en>Deal with this</en>
+      <fr>Traiter</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="PrestatieCode">
+      <nl>Prestatiecode</nl>
+      <en>Performance code</en>
+      <fr>Code performances</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="MinBezetting">
+      <nl>Min. bezetting</nl>
+      <en>Minimum manpower</en>
+      <fr>Occupation minimum</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="AantAanwezig">
+      <nl>Aantal aanwezig</nl>
+      <en>Number present</en>
+      <fr>Nombre présent</fr>
+    </DynamischeTekst>
+    <DynamischeTekst class="AantAangevraagd">
+      <nl>Aantal aangevraagd</nl>
+      <en>Number requested</en>
+      <fr>Nombre demandé</fr>
+    </DynamischeTekst>
+    DynamischeTekst[class="btnDagenBevestigen"]
+    <DynamischeTekst class="btnDagenBevestigen">
+      <nl>Bevestigen</nl>
+      <en>Confirm</en>
+      <fr>Confirmer</fr>
+    </DynamischeTekst>
+  </Vertalingen>
+</configuratie>

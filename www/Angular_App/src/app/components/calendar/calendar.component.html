@@ -1,0 +1,45 @@
+<div class="calendar container">
+    <div class="calendar-navs row">
+        <div class="month-nav col-6">
+            <button (click)="prevMonth()" class="btn btn-primary btn-sm">
+                <i class="fas fa-angle-left"></i>
+            </button>
+            <span class="p4 text-light">{{ currentDate.format('MMMM') }}</span>
+            <button (click)="nextMonth()" class="btn btn-primary btn-sm">
+                <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+        <div class="year-nav col-6">
+            <button (click)="prevYear()" class="btn btn-primary btn-sm">
+                <i class="fas fa-angle-left"></i>
+            </button>
+            <span class="text-light">{{ currentDate.format('YYYY') }}</span>
+            <button (click)="nextYear()" class="btn btn-primary btn-sm">
+                <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="month-grid">
+        <div class="day-names row">
+            <div *ngFor="let name of dayNames" class="day-name p9 col">
+                {{ name }}
+            </div>
+        </div>
+        <div class="weeks">
+            <div *ngFor="let week of weeks" class="week row">
+                <ng-container *ngFor="let day of week">
+                    <div class="week-date disabled col" *ngIf="!isSelectedMonth(day.mDate)">
+                        <span class="date-text">{{ day.mDate.date() }}</span>
+                    </div>
+                    <div class="week-date enabled col"
+                            *ngIf="isSelectedMonth(day.mDate)"
+                            (click)="selectDate(day)"
+                            [ngClass]="{ today: day.today, selected: day.selected }"
+                            [ngStyle]="{ 'background': getDayBackgroundExpression(day) }">
+                        <span class="date-text">{{ day.mDate.date() }}</span>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

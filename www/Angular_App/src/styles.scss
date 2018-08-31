@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/arizona-pattern-library/lib/overrides.scss";
+
+$apl-assets-path: '../node_modules/arizona-pattern-library/lib/assets';
+$apl-header-icon-path: '#{$apl-assets-path}/img/logo-admb.png';
+
+@import "../node_modules/arizona-pattern-library/lib/styles.scss";
+
+@import "./app/lib/fontawesome/scss/fontawesome.scss";
+@import '../node_modules/arizona-pattern-library/lib/app/scss/_colors.scss';
+
+body {
+    background-color: white;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+@mixin icon($icon) {
+    @include fa-icon;
+    @extend .fa;
+    @extend .fa-#{$icon};
+}
+
+arz-input-select .input-group--floating-label::after {
+    font-family: "Font Awesome\ 5 Free" !important;
+}
+
+.theme-light{
+    background-color: map-get($theme-colors, light);
+}
+
+.height-100 {
+    height: calc(100% - 88px);
+}

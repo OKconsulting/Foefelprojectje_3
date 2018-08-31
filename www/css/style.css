@@ -1,0 +1,609 @@
+﻿@-ms-viewport {
+    zoom: 1.0;
+    width: device-width;
+    user-zoom: fixed;
+}
+@-o-viewport { 
+    zoom: 1.0;
+    width: device-width;
+    user-zoom: fixed;
+}
+
+a, p, th, td {
+    text-shadow: 0 0 0 white !important;
+}
+
+div[data-role="page"] {
+    /*height: 100% !important;*/
+    min-height: 100% !important;
+}
+
+#containerLogin {
+    position: absolute;
+    margin-top: -75px;
+    top: 50%;
+    left: 16px;
+    right: 16px;
+}
+
+div[data-role=footer].ui-footer.ui-bar-inherit.ui-footer-fixed.slideup {
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: 0px;
+}
+
+#containerLoading {
+    position: absolute;
+    margin-top: -15px;
+    top: 50%;
+    left: 16px;
+    right: 16px;
+    text-align: center;
+    display: none;
+}
+
+.ui-footer {
+    text-align: center;
+}
+
+.ui-header-fixed.ui-fixed-hidden {
+    top: 0;
+    padding-top: 0;
+}
+
+#login .melding {
+    top: 0;
+}
+
+.melding {
+    font-weight: bold;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    display: none;
+    background-color: #FF5757;
+    color: white;
+    padding: 16px;
+    text-align: center;
+    z-index: 3;
+    font-size: 14px;
+    text-shadow: 0px 0px;
+}
+
+div[data-role] {
+    background-color: #f9f9f9;
+}
+
+div[data-role]#login {
+    background-color: #00bebe;
+    padding: 0px !important;
+}
+
+div[data-role]#login div.ui-content {
+    background-color: transparent;
+}
+
+div[data-role] .ui-content {
+    color: black;
+}
+
+div[data-role] .header.ui-header.ui-bar-inherit.ui-header-fixed.slidedown {
+    background-color: #00bebe;
+    border-bottom: 3px #008787 solid;
+    height: 46px;
+}
+
+.header .left {
+    float: left;
+    width: 100px;
+}
+
+.header .left a {
+    padding: 13px 0 11px 12px !important;
+    color: white;
+    width: 50px;
+    display: inline-block;
+    text-align: left;
+    float: left;
+}
+
+.header .right {
+    float: right;
+    width: 100px;
+}
+
+.header .right a {
+    padding: 13px 12px 11px 0px !important;
+    width: 50px;
+    display: inline-block;
+    text-align: right;
+    float: right;
+}
+
+.header .left a img, .header .right a img {
+    height: 22px;
+}
+
+.header .center h1 {
+    margin: 0px;
+    line-height: 20px;
+    font-size: 16pt;
+}
+
+.header .center h1 a {
+    color: white;
+    text-decoration: none;
+    text-shadow: 0px 0px;
+}
+
+.header h1 {
+    padding: 14px 0px 11px 0px !important;
+}
+
+.header .center {
+    text-align: center;
+    margin: 0 auto;
+    width: 100px;
+}
+
+.ui-panel-inner {
+    padding: 0em;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+.menu li a img {
+    width: 25px;
+    margin-right: 10px;
+    float: left;
+}
+
+.menu li a span {
+    float: left;
+    margin-top: 3px;
+}
+
+.clear-fix {
+    clear: both;
+}
+
+.menu li a {
+    display: block;
+    padding: 15px 0 15px 15px;
+    border-bottom: 2px solid #e5e5e5;
+    text-decoration: none;
+    font-weight: normal;
+    cursor: pointer;
+    clear: both;
+}
+
+#home_panel, #historiek_panel, #verlof_panel, #details_panel, #opties_panel, #about_panel, #aanvragen_panel, #detailsAanvraag_panel {
+    margin-top: 51px;
+    background-color: #f9f9f9;
+    z-index: 5;
+}
+
+#home_panel .ui-panel-inner, #historiek_panel .ui-panel-inner, #verlof_panel .ui-panel-inner, #details_panel .ui-panel-inner, #opties_panel .ui-panel-inner, #about_panel .ui-panel-inner, #aanvragen_panel .ui-panel-inner, #detailsAanvraag_panel .ui-panel-inner{
+    padding: 0;
+}
+
+#home_panel .ui-panel-inner ul, #historiek_panel .ui-panel-inner ul, #verlof_panel .ui-panel-inner ul, #details_panel .ui-panel-inner ul, #opties_panel .ui-panel-inner ul, #about_panel .ui-panel-inner ul, #aanvragen_panel .ui-panel-inner ul, #detailsAanvraag_panel .ui-panel-inner ul{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+#home_panel .ui-panel-inner ul li a, #historiek_panel .ui-panel-inner ul li a, #verlof_panel .ui-panel-inner ul li a, #details_panel .ui-panel-inner ul li a, #opties_panel .ui-panel-inner ul li a, #about_panel .ui-panel-inner ul li a, #aanvragen_panel .ui-panel-inner ul li a, #detailsAanvraag_panel .ui-panel-inner ul li a{
+    color: black;
+    text-shadow: 0px 0px;
+    font-weight: normal;
+}
+
+table#table-column-toggle th, table#table-column-toggle_historiek th {
+    text-transform: uppercase;
+    font-size: .7em;
+    opacity: .7;
+    padding: 1.2em .8em;
+    background-color: #ddd;
+}
+
+table#table-column-toggle td, table#table-column-toggle_historiek td{
+    text-align: right;
+}
+
+table#table-column-toggle thead th, table#table-column-toggle_historiek thead th {
+    text-align: right;
+}
+
+table#table-column-toggle thead th:first-child, table#table-column-toggle_historiek thead th:first-child {
+    text-align: left;
+}
+
+a[href="#table-column-toggle-popup"], a[href="#table-column-toggle_historiek-popup"] {
+    width: 100%;
+    padding: 8.75px 0px;
+}
+
+#Toon-kalender > a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 2px 20px;
+    border-top-right-radius: 5px;
+}
+
+#Toon-kalender .ui-input-text {
+    border: 0;
+    margin-top: 20px;
+}
+
+#Legende > p {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 10pt;
+}
+
+#Legende div div {
+    margin-bottom: 10px;
+}
+
+#Legende div div div {
+    display: inline;
+    margin-right: 10px;
+}
+
+#Legende .kleur {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+}
+
+#Legende div div p {
+    display: inline;
+    font-size: 9pt;
+}
+
+#Toon-kalender .ui-datepicker-inline td .ui-btn-active{
+    background-color: #f6f6f6;
+    border-color: #ddd;
+    color: #333;
+}
+
+#Toon-kalender .ui-datepicker-inline td .ui-btn-active:hover{
+    background-color: #ededed;
+}
+
+#Toon-kalender td.ui-datepicker-week-end{
+    opacity: 1;
+    /*background-color: #C0C0C0;*/
+}
+
+#Toon-kalender td.ui-state-disabled {
+    background-color: white;
+    opacity: .3 !important;
+}
+
+#Toon-kalender td.ui-datepicker-week-end span {
+    color: black;
+    opacity: 1;
+}
+
+#Toon-kalender td.ui-state-disabled span {
+    opacity: .7;
+    color: #333333;
+}
+
+#Toon-kalender td.ui-datepicker-week-end.ui-datepicker-other-month {
+    background-color: white;
+}
+
+#verlofAanvr fieldset {
+    border: 1px #d6d6d6 solid;
+    padding: 7px;
+    margin-bottom: 15px;
+}
+
+#verlofAanvr div[class="ui-body-a"] {
+    border: 0;
+}
+
+#ui-datepicker-div {
+    background-color: white;
+    padding: 10px;
+    top: 50% !important;
+    left: 50% !important;
+    margin-left: -138px;
+    margin-top: -138px;
+}
+
+.headerLogo {
+    margin-top: 50px;
+    text-align: center;
+}
+
+tbody td {
+    font-size: 10pt;
+    vertical-align: middle !important;
+}
+
+form .ui-field-contain {
+    padding: 0;
+}
+
+form .ui-field-contain .ui-select ui-mini {
+    margin: 0;
+}
+
+div.customDatepicker {
+    margin-top: 20px !important;
+}
+
+div.customDatepicker table tbody td a {
+    color: black;
+    font-size: 12pt;
+}
+
+.ui-datepicker-unselectable span{
+    font-size: 12pt !important;
+    padding: 9.6px 8px !important;
+}
+
+#dteVanPopup, #dteTotPopup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -133px;
+    margin-top: -172px !important;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px #888888;
+    z-index: 2;
+}
+
+#dteOverlay {
+    width: 250px;
+    height: 330px;
+    position: absolute;
+    top: 33px;
+    left: 14px;
+}
+/*
+#opPageFooter, #abPageFooter {
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    margin-left: -16px;
+    bottom: 0;
+    margin-bottom: 20px;
+}*/
+
+#loadingDivSaldi, #loadingDivHist, #loadingDivDetailsDagen, #loadingDivDetailD, #loadingDivAanvragen, #loadingDivDetailAanvraag {
+    position: absolute;
+    z-index: 1;
+    width: 120px;
+    height: 120px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: white;
+    width: 75px;
+    height: 75px;
+    border-radius: 38px;
+}
+
+#loadingDivSaldi img, #loadingDivHist img, #loadingDivDetailsDagen img, #loadingDivDetailD img, #loadingDivAanvragen img, #loadingDivDetailAanvraag img {
+    margin-top: 12px;
+    margin-left: 12px;
+}
+
+#dteVanPrev {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#dteVanNext {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#colSet input[type="text"] {
+    text-align: right;
+}
+
+#colSet label {
+    display: inline-block;
+    margin-right: 10px;
+    min-width: 140px;
+    text-align: right;
+}
+
+#colSet .ui-input-text {
+    display: inline-block;
+}
+
+#About #contactGeg p {
+    font-weight: bold;
+    font-size: 13pt;
+}
+
+#contactGeg {
+    position: absolute;
+    text-align: center;
+    left: 0;
+    top: 50%;
+    margin-top: -70px;
+    word-wrap: break-word;
+    color: #00bebe;
+    width: 100%;
+}
+
+#contactGeg p:nth-child(5) {
+    margin-bottom: 20px;
+}
+
+table#tblPCodes th, #tblHist th{
+    text-transform: uppercase;
+    font-size: .7em;
+    opacity: .7;
+    padding: 1.2em .8em;
+    background-color: #ddd;
+}
+
+table#tblPCodes td, #tblHist td{
+    text-align: right;
+}
+
+table#tblPCodes thead th, #tblHist thead th{
+    text-align: right;
+}
+
+table#tblPCodes thead th:first-child, #tblHist thead th:first-child{
+    text-align: left;
+}
+
+#btnDetailDagen {
+    width: 100%;
+}
+
+.vet {
+    font-weight: bold;
+}
+
+.ui-mobile label.vet , .ui-mobile label.vet {
+    font-weight: bold;
+}
+
+.hiddenField {
+    display: none;
+}
+
+.aanvraagInfo {
+    margin: 5px 0 5px;
+    border-bottom: 1px #bbb dotted;
+    padding-bottom: 2px;
+}
+
+.aanvraagInfo span:nth-child(1) {
+     text-align: left;
+}
+
+.aanvraagInfo span:nth-child(2) {
+    text-align: right;
+}
+
+.aanvraagInfo span {
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+}
+
+.StandaloneCollapsible.ui-collapsible {
+    border-right: rgb(221, 221, 221) 1px solid;
+    border-left: rgb(221, 221, 221) 1px solid;
+    margin: 0;
+}
+
+#detailsAanvraag .ui-content .StandaloneCollapsible:first-child {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+#detailsAanvraag .ui-content .StandaloneCollapsible:last-child {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.multilineDetail p:first-child{
+    margin-bottom: 5px;
+}
+
+.multilineDetail p:last-child{
+    border-bottom: dotted 1px #bbb;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+#txaRedenAanvraagKeuren {
+    height: 80px !important;
+}
+
+#confirmBoxAanvr .confContent {
+    display: inline-block;
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+    width: 350px;
+    padding: 20px 20px 5px 20px;
+    box-shadow: 1px 1px 10px #888;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -195px;
+}
+
+.confBackg {
+    background-color: rgba(204, 204, 204, .5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+}
+
+#divConfAanvrNo, #divConfAanvrYes {
+    width: 135px;
+    display: inline-block;
+}
+
+#divConfAanvrYes {
+    float: right;
+}
+
+#confirmBoxAanvr {
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+#abPageFooter {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0;
+}
+
+.headerLogo-footer {
+    width: 30%;
+    max-width: 150px;
+}
+
+.ui-page .ui-footer-fixed.ui-fixed-hidden
+{
+    display: block;
+}

@@ -1,0 +1,31 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <div class="row">
+            <div class="mt-3 col">
+                <div class="form-group">
+                    <arz-date-picker 
+                        label="Verlof periode" 
+                        [controlFrom]="form.get('dateFrom')" 
+                        [controlTo]="form.get('dateTo')">
+                    </arz-date-picker>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <arz-textarea 
+                        label="Opmerking" 
+                        placeholder="Voeg u opmerking hier toe" 
+                        [control]="form.get('comment')">
+                    </arz-textarea>
+                </div>
+            </div>
+        </div>
+        <arz-form-footer 
+            [form]="form" 
+            submitText="Verder" 
+            [displayLoader]="formLoading">
+        </arz-form-footer>
+    </form>
+</div>

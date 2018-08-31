@@ -1,0 +1,64 @@
+<div class="container">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="mt-3 col">
+                <div class="form-group">
+                    <arz-input-select [control]="form.get('holiday')" [options]="holidays" label="Afwezigheid"></arz-input-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col mt-3">
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Van
+                    </div>
+                    <div class="col-5 p-3">
+                        01/01/18
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Tot
+                    </div>
+                    <div class="col-5 p-3">
+                        05/01/18
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Aantal dagen
+                    </div>
+                    <div class="col-5 p-3">
+                        5
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Aangevraagd op
+                    </div>
+                    <div class="col-5 p-3">
+                        01/12/17
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Status
+                    </div>
+                    <div class="col-5 p-3">
+                        Goedgekeurd
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Behandeld door
+                    </div>
+                    <div class="col-5 p-3">
+                        Francois Harlekyn
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+    <ul class="list-group pt-3" *ngIf="!holiday">
+        <li class="list-group-item" *ngFor="let item of holidays" (click)="selectHoliday(item)">
+            {{ item }} <i class="fas fa-angle-right pull-right text-primary"></i>
+        </li>
+    </ul>
+    <div class="row" *ngIf="holiday">
+        <div class="col">
+            <div class="row">
+                <div class="col-7 p-3 theme-light">
+                    Medewerker
+                </div>
+                <div class="col-5 p-3">
+                    Emma
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7 p-3 theme-light">
+                    Type
+                </div>
+                <div class="col-5 p-3">
+                    Jaarlijkse vakantie
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7 p-3 theme-light">
+                    Periode
+                </div>
+                <div class="col-5 p-3">
+                    05/03/18 - 07/03/18
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-3">
+                    <button type="button" class="btn btn-outline-primary btn-tailr-w pull-left" (click)="selectHoliday(null)">
+                        Afkeuren
+                    </button>
+                </div>
+                <div class="col mt-3">
+                    <button type="button" class="btn btn-primary btn-tailr-w pull-right" (click)="selectHoliday(null)">
+                        Goedkeuren
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

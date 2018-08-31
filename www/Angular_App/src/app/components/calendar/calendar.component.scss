@@ -1,0 +1,112 @@
+// Colors
+@import '../../../../node_modules/arizona-pattern-library/lib/app/scss/_colors.scss';
+//
+$base: 1rem;
+// $dayBase: 30px;
+
+.calendar {
+  display: block;
+  margin: 0 auto;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .calendar-navs {
+    background-color: map-get($theme-colors, tertiary);
+  }
+
+  .month-nav {
+    padding: $base;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .year-nav {
+    padding: $base;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Montserrat';
+    text-align: center;
+  }
+
+  .month-grid {
+    .day-names {
+      display: flex;
+      flex-direction: row;
+      background: map-get($theme-colors, light);
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    .weeks {
+      display: flex;
+      flex-direction: column;
+    }
+    .week {
+      display: flex;
+      flex-direction: row;
+    }
+    .week-date,
+    .day-name {
+      text-align: center;
+      padding: $base;
+      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .week-date {
+      position: relative;
+
+      .date-text {
+        z-index: 10;
+        font-size: 10px;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        transition: background-color 150ms linear, color 150ms linear;
+        z-index: 1;
+      }
+
+      &.enabled {
+        cursor: pointer;
+        font-weight: bold;
+        &:hover {
+          &:after {
+            background-color: map-get($theme-colors, tertiary);
+          }
+        }
+      }
+      &.selected {
+        color: $white;
+        &:after {
+          background-color: map-get($theme-colors, secondary);
+        }
+        &:hover {
+          &:after {
+            background-color: map-get($theme-colors, secondary);
+          }
+        }
+      }
+
+      &.disabled {
+        color: map-get($theme-colors, secondary);
+      }
+    }
+
+    .today {
+      font-weight: bold;
+    }
+  }
+} 

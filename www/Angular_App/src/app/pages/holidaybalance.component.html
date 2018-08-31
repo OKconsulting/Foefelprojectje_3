@@ -1,0 +1,70 @@
+<div class="container">
+    <form [formGroup]="selectFrm">
+        <div class="row">
+            <div class="mt-3 col">
+                <div class="form-group">
+                    <arz-input-select [control]="selectFrm.get('year')" [options]="yearOptions" label="Jaar"></arz-input-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <arz-input-select [control]="selectFrm.get('type')" [options]="typeOptions" label="Type"></arz-input-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mt-3">
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Beginsaldo (uren)
+                    </div>
+                    <div class="col-5 p-3">
+                        160
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Gebruikt (uren)
+                    </div>
+                    <div class="col-5 p-3">
+                        80
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Aangevraagd (uren)
+                    </div>
+                    <div class="col-5 p-3">
+                        20
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Beschikbaar (uren)
+                    </div>
+                    <div class="col-5 p-3">
+                        60
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Geldig van
+                    </div>
+                    <div class="col-5 p-3">
+                        01/01/2018
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-3 theme-light">
+                        Geldig tot
+                    </div>
+                    <div class="col-5 p-3">
+                        31/12/2018
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

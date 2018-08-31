@@ -1,0 +1,1626 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        
+        <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+
+        <title>my.e-ok</title>
+		<link href="css/reset.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/jquery.mobile-1.4.3.min.css" rel="stylesheet" />
+		<link href="css/jquery.mobile.datepicker.css" rel="stylesheet" />
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/jquery.mobile-1.4.3.min.js"></script>
+		<script src="js/jquery.mobile.datepicker.js"></script>
+    </head>
+    <body class="ui-mobile-viewport ui-overlay-c">
+        <div data-role="page" id="home" data-theme="b">
+			<a id="aHome" href="#home"></a>
+			<a id="aDetailsDagen" href="#DetailsDagen"></a>
+			<a id="aAanvragen" href="#aanvragen"></a>
+            <a id="aDetailsAanvraag" href="#detailsAanvraag"></a>
+
+			<div class="melding" onclick="hideMelding()">
+			</div>
+			<div data-role="header" class="header" data-position="fixed">
+				<div class="left"><a href="#home_panel"><img src="img/menu.png" /></a></div>
+				<div class="right"><a href="#" data-role="none" data-rel="popup" data-position-to="window" onclick="reloadSaldi()"><img src="img/herladen.png" /></a></div>
+				<div class="center"><h1><a href="#home">my.e-ok</a></h1></div>
+			</div>
+
+			<div data-role="content" class="ui-content" role="main">
+				<div id="loadingDivSaldi">
+					<img src="img/gif-load_blue.gif" />
+				</div>
+				<form>
+					<div class="ui-field-contain">
+						<select name="select-native-2" id="cboJaar" data-mini="true" data-theme="a" onchange="reloadSaldi()"></select>
+						<select name="select-native-3" id="cboPrestatieC" data-mini="true" data-theme="a" onchange="changePrestC()"></select>
+					</div>
+				</form>
+				<table id="tblPCodes" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+					<thead>
+						<tr>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="tblPCodes1">
+							<th class="tblPCodes1">Beginsaldo</th>
+						</tr>
+						<tr id="tblPCodes2">
+							<th class="tblPCodes2">Gebruikt</th>
+						</tr>
+						<tr id="tblPCodes3">
+							<th class="tblPCodes3">Aangevraagd</th>
+						</tr>
+						<tr id="tblPCodes4">
+							<th class="tblPCodes4">Beschikbaar</th>
+						</tr>
+						<tr id="tblPCodes5">
+							<th class="tblPCodes5">Beschikbare uren</th>
+						</tr>
+						<tr id="tblPCodes7">
+							<th class="tblPCodes7">Geldig vanaf</th>
+						</tr>
+						<tr id="tblPCodes6">
+							<th class="tblPCodes6">Geldig tot</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div data-role="panel" id="home_panel" data-position="left" data-display="overlay" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
+				<div class="ui-panel-inner">
+					<a href="#home" data-transition="none" data-rel="close" class='home_hide_panel' style='display:none;'></a>
+					<ul class="menu">
+						<li><a href="#home" data-rel="close" data-transition="none"><img src="img/home.png" /><span class="lblMenuHome">Verlofsaldo</span><div class="clear-fix"></div></a></li>
+						<li><a href="#verlofAanv" data-rel="close" data-transition="none"><img src="img/kalender_black.png" /><span class="lblMenuVerlof">Verlof aanvragen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#historiek" data-rel="close" data-transition="none"><img src="img/history.png" /><span class="lblMenuHistoriek">Historiek</span><div class="clear-fix"></div></a></li>
+
+						<li class="menuBehandelen"><a href="#aanvragen" data-rel="close" data-transition="none"><img src="img/KalenderChecked.png" /><span class="lblMenuAanvragen">Aanvragen behandelen</span><div class="clear-fix"></div></a></li>
+
+						<li><a href="#Opties" data-rel="close" data-transition="none"><img src="img/opties.png" /><span class="lblMenuInst">Taalkeuze</span><div class="clear-fix"></div></a></li>
+						<li><a href="#About" data-rel="close" data-transition="none"><img src="img/About.png" /><span>Liantis</span><div class="clear-fix"></div></a></li>
+						<li><a onclick="logout()"><img src="img/logout.png" /><span class="lblMenuLogout">Uitloggen</span><div class="clear-fix"></div></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="verlofAanv" data-theme="b">
+			<div class="melding" onclick="hideMelding()">
+			</div>
+			<div data-role="header" class="header" data-position="fixed">
+				<div class="left"><a href="#verlof_panel" data-transition="none"><img src="img/menu.png" /></a></div>
+				<div class="right"><a href="#Toon-kalender" onclick="styleDteOverview()" data-role="none" data-rel="popup" data-position-to="window"><img src="img/kalender.png" /></a></div>
+				<div class="center"><h1><a href="#home">my.e-ok</a></h1></div>
+			</div>
+
+			<div data-role="popup" id="Toon-kalender" class="ui-content" data-theme="a">
+				<a data-rel="back" class="ui-btn">x</a>
+				<div id="dteOverlay"></div>
+				<div id="dteOverview" class="customDatepicker"></div>
+				<div id="Legende">
+					<p>Legende</p>
+					<div>
+						<div>
+							<div class="kleur" style="background-color: #FFCC00;"></div>
+							<p>Wettelijke Feestdag</p>
+						</div>
+						<div>
+							<div class="kleur" style="background-color: #FFFF00;"></div>
+							<p>Betaalde inhaalrust</p>
+						</div>
+						<div>
+							<div class="kleur" style="background-color: #CCFFD1;"></div>
+							<p>Aangevraagd verlof</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div data-role="content" class="ui-content" role="main">
+				<div id="loadingDivDetailsDagen">
+					<img src="img/gif-load_blue.gif" />
+				</div>
+				<form id="verlofAanvr">
+					<fieldset>
+						<label id="lblDatVan" class="lblDatVanAanvr">Datum van</label>
+						<input name="dteVan" id="dteVan" type="text" data-theme="a" onfocus="showDteVanPopup('dteVan')" oninput="clearVanDte()" readonly />
+						<!--<input name="dteVan" id="dteVan" type="text" data-role="date" data-theme="a" oninput="clearVanDte()">-->
+						<label id="lblDatTot" class="lblDatTotAanvr">Datum tot</label>
+						<input name="dteTot" id="dteTot" type="text" data-theme="a" onfocus="showDteTotPopup('dteTot')" oninput="clearTotDte()" readonly />
+						<!--<input name="dteTot" id="dteTot" type="text" data-role="date" data-theme="a" oninput="clearTotDte()">-->
+						<label id="txaReden" class="txaRedenAanvr" for="txaReden">Reden van afwezigheid</label>
+						<textarea id="txaRedenVal" name="txaReden" data-theme="a"></textarea>
+						<div class="ui-btn ui-input-btn ui-corner-all ui-shadow ui-btn-a">
+							<input data-theme="b" id="btnDetailDagen" class="btnDetailDagenAanvr" type="submit" value="Verder" />Verder
+							<!--<a onclick="haalDagenOp()" href="#" data-transition="none" class="ui-btn" data-role="none" data-position-to="window">Details dagen</a>-->
+						</div>
+						<div id="dteVanPopup" class="customDatepicker"></div>
+						<div id="dteTotPopup" class="customDatepicker"></div>
+					</fieldset>
+				</form>
+			</div>
+
+			<div data-role="panel" id="verlof_panel" data-position="left" data-display="overlay" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
+				<div class="ui-panel-inner">
+					<a href="#verlofAanv" data-transition="none" data-rel="close" class='verlof_hide_panel' style='display:none;'></a>
+					<ul class="menu">
+						<li><a href="#home" data-rel="close" data-transition="none"><img src="img/home.png" /><span class="lblMenuHome">Verlofsaldo</span><div class="clear-fix"></div></a></li>
+						<li><a href="#verlofAanv" data-rel="close" data-transition="none"><img src="img/kalender_black.png" /><span class="lblMenuVerlof">Verlof aanvragen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#historiek" data-rel="close" data-transition="none"><img src="img/history.png" /><span class="lblMenuHistoriek">Historiek</span><div class="clear-fix"></div></a></li>
+
+						<li class="menuBehandelen"><a href="#aanvragen" data-rel="close" data-transition="none"><img src="img/KalenderChecked.png" /><span class="lblMenuAanvragen">Aanvragen behandelen</span><div class="clear-fix"></div></a></li>
+
+						<li><a href="#Opties" data-rel="close" data-transition="none"><img src="img/opties.png" /><span class="lblMenuInst">Taalkeuze</span><div class="clear-fix"></div></a></li>
+						<li><a href="#About" data-rel="close" data-transition="none"><img src="img/About.png" /><span>Liantis</span><div class="clear-fix"></div></a></li>
+						<li><a onclick="logout()"><img src="img/logout.png" /><span class="lblMenuLogout">Uitloggen</span><div class="clear-fix"></div></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="DetailsDagen" data-theme="b">
+			<div class="melding" onclick="hideMelding()">
+			</div>
+			<div data-role="header" class="header" data-position="fixed">
+				<div class="left"><a href="#details_panel" data-transition="none"><img src="img/menu.png" /></a></div>
+				<div class="center"><h1><a href="#home">my.e-ok</a></h1></div>
+			</div>
+
+			<div data-role="content" class="ui-content" role="main">
+				<div id="loadingDivDetailD" style="display: none;">
+					<img src="img/gif-load_blue.gif">
+				</div>
+				<div data-role="collapsibleset" data-theme="a" data-iconpos="right" id="colSet">
+				</div>
+			</div>
+
+			<div data-role="panel" id="details_panel" data-position="left" data-display="overlay" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
+				<div class="ui-panel-inner">
+					<a href="#DetailsDagen" data-transition="none" data-rel="close" class='details_hide_panel' style='display:none;'></a>
+					<ul class="menu">
+						<li><a href="#home" data-rel="close" data-transition="none"><img src="img/home.png" /><span class="lblMenuHome">Verlofsaldo</span><div class="clear-fix"></div></a></li>
+						<li><a href="#verlofAanv" data-rel="close" data-transition="none"><img src="img/kalender_black.png" /><span class="lblMenuVerlof">Verlof aanvragen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#historiek" data-rel="close" data-transition="none"><img src="img/history.png" /><span class="lblMenuHistoriek">Historiek</span><div class="clear-fix"></div></a></li>
+
+						<li class="menuBehandelen"><a href="#aanvragen" data-rel="close" data-transition="none"><img src="img/KalenderChecked.png" /><span class="lblMenuAanvragen">Aanvragen behandelen</span><div class="clear-fix"></div></a></li>
+
+						<li><a href="#Opties" data-rel="close" data-transition="none"><img src="img/opties.png" /><span class="lblMenuInst">Instellingen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#About" data-rel="close" data-transition="none"><img src="img/About.png" /><span>Liantis</span><div class="clear-fix"></div></a></li>
+						<li><a onclick="logout()"><img src="img/logout.png" /><span class="lblMenuLogout">Uitloggen</span><div class="clear-fix"></div></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="historiek" data-theme="b">
+			<div class="melding" onclick="hideMelding()">
+			</div>
+			<div data-role="header" class="header" data-position="fixed">
+				<div class="left"><a href="#historiek_panel" data-transition="none"><img src="img/menu.png" /></a></div>
+				<div class="right"><a href="#" data-role="none" data-rel="popup" data-position-to="window" onclick="reloadHist()"><img src="img/herladen.png" /></a></div>
+				<div class="center"><h1><a href="#home">my.e-ok</a></h1></div>
+			</div>
+
+			<div data-role="content" class="ui-content" role="main">
+				<div id="loadingDivHist">
+					<img src="img/gif-load_blue.gif" />
+				</div>
+				<form>
+					<div class="ui-field-contain">
+						<select name="select-native-4" id="cboHistItems" data-mini="true" data-theme="a" onchange="changeHistItem()"></select>
+					</div>
+				</form>
+				<table id="tblHist" class="ui-responsive table-stroke ui-table ui-table-columntoggle">
+					<thead>
+						<tr>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="tblHist1">
+							<th class="tblHist1">Van</th>
+						</tr>
+						<tr id="tblHist2">
+							<th class="tblHist2">Tot en met</th>
+						</tr>
+						<tr id="tblHist3">
+							<th class="tblHist3">Aantal dagen</th>
+						</tr>
+						<tr id="tblHist4">
+							<th class="tblHist4">Aangevraagd op</th>
+						</tr>
+						<tr id="tblHist5">
+							<th class="tblHist5">Status</th>
+						</tr>
+						<tr id="tblHist6">
+							<th class="tblHist6">Behandeld door</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div data-role="panel" id="historiek_panel" data-position="left" data-display="overlay" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
+				<div class="ui-panel-inner">
+					<a href="#historiek" data-transition="none" data-rel="close" class='historiek_hide_panel' style='display:none;'></a>
+					<ul class="menu">
+						<li><a href="#home" data-rel="close" data-transition="none"><img src="img/home.png" /><span class="lblMenuHome">Verlofsaldo</span><div class="clear-fix"></div></a></li>
+						<li><a href="#verlofAanv" data-rel="close" data-transition="none"><img src="img/kalender_black.png" /><span class="lblMenuVerlof">Verlof aanvragen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#historiek" data-rel="close" data-transition="none"><img src="img/history.png" /><span class="lblMenuHistoriek">Historiek</span><div class="clear-fix"></div></a></li>
+
+						<li class="menuBehandelen"><a href="#aanvragen" data-rel="close" data-transition="none"><img src="img/KalenderChecked.png" /><span class="lblMenuAanvragen">Aanvragen behandelen</span><div class="clear-fix"></div></a></li>
+
+						<li><a href="#Opties" data-rel="close" data-transition="none"><img src="img/opties.png" /><span class="lblMenuInst">Instellingen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#About" data-rel="close" data-transition="none"><img src="img/About.png" /><span>Liantis</span><div class="clear-fix"></div></a></li>
+						<li><a onclick="logout()"><img src="img/logout.png" /><span class="lblMenuLogout">Uitloggen</span><div class="clear-fix"></div></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="aanvragen" data-theme="b">
+			<div class="melding" onclick="hideMelding()">
+			</div>
+			<div data-role="header" class="header" data-position="fixed">
+				<div class="left"><a href="#aanvragen_panel" data-transition="none"><img src="img/menu.png" /></a></div>
+				<div class="right"><a href="#" data-role="none" data-rel="popup" data-position-to="window" onclick="getAanvragenLGHR()"><img src="img/herladen.png" /></a></div>
+				<div class="center"><h1><a href="#home">my.e-ok</a></h1></div>
+			</div>
+
+			<div data-role="content" class="ui-content" role="main">
+				<div id="loadingDivAanvragen" style="display: none;">
+					<img src="img/gif-load_blue.gif">
+				</div>
+				<div id="confirmBoxAanvr" class="confirmBox" style="display:none;">
+					<div class="confBackg">&nbsp;</div>
+					<div class="confContent">
+						<p class="txtConfirmAanvr">Weet je zeker dat je alle aanvragen wilt goedkeuren?</p>
+						<div id="divConfAanvrNo" class="ui-btn ui-input-btn ui-corner-all ui-shadow ui-btn-a"><input data-theme="b" id="btnConfAanvrNo" class="btnConfAanvrNo" type="submit" value="Nee" />Nee</div>
+						<div id="divConfAanvrYes" class="ui-btn ui-input-btn ui-corner-all ui-shadow ui-btn-a"><input data-theme="b" id="btnConfAanvrYes" class="btnConfAanvrYes" type="submit" value="Ja" />Ja</div>
+					</div>
+				</div>
+				<div data-role="collapsibleset" data-theme="a" data-iconpos="right" id="colSetAanvragen">
+				</div>
+				<div class="ui-btn ui-input-btn ui-corner-all ui-shadow ui-btn-a"><input data-theme="b" id="btnAllesGoedkeuren" class="btnAllesGoedkeuren" type="submit" value="Alles goedkeuren" />Alles goedkeuren</div>
+			</div>
+
+			<div data-role="panel" id="aanvragen_panel" data-position="left" data-display="overlay" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
+				<div class="ui-panel-inner">
+					<a href="#aanvragen" data-transition="none" data-rel="close" class='aanvragen_hide_panel' style='display:none;'></a>
+					<ul class="menu">
+						<li><a href="#home" data-rel="close" data-transition="none"><img src="img/home.png" /><span class="lblMenuHome">Verlofsaldo</span><div class="clear-fix"></div></a></li>
+						<li><a href="#verlofAanv" data-rel="close" data-transition="none"><img src="img/kalender_black.png" /><span class="lblMenuVerlof">Verlof aanvragen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#historiek" data-rel="close" data-transition="none"><img src="img/history.png" /><span class="lblMenuHistoriek">Historiek</span><div class="clear-fix"></div></a></li>
+
+						<li class="menuBehandelen"><a href="#aanvragen" data-rel="close" data-transition="none"><img src="img/KalenderChecked.png" /><span class="lblMenuAanvragen">Aanvragen behandelen</span><div class="clear-fix"></div></a></li>
+
+						<li><a href="#Opties" data-rel="close" data-transition="none"><img src="img/opties.png" /><span class="lblMenuInst">Instellingen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#About" data-rel="close" data-transition="none"><img src="img/About.png" /><span>Liantis</span><div class="clear-fix"></div></a></li>
+						<li><a onclick="logout()"><img src="img/logout.png" /><span class="lblMenuLogout">Uitloggen</span><div class="clear-fix"></div></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="detailsAanvraag" data-theme="b">
+			<div class="melding" onclick="hideMelding()">
+			</div>
+			<div data-role="header" class="header" data-position="fixed">
+				<div class="left"><a href="#detailsAanvraag_panel" data-transition="none"><img src="img/menu.png" /></a></div>
+				<div class="center"><h1><a href="#home">my.e-ok</a></h1></div>
+			</div>
+
+			<div data-role="content" class="ui-content" role="main" data-theme="a">
+				<div id="loadingDivDetailAanvraag" style="display: none;">
+					<img src="img/gif-load_blue.gif">
+				</div>
+
+				<span class="hiddenField" id="aanvrGoedkeuringID"></span>
+				<span class="hiddenField" id="aanvrAanvraagID"></span>
+				<span class="hiddenField" id="aanvrMdwID"></span>
+				<p><span class="vet lblAanvraagVanBeh">Aanvraag van: </span><span id="aanvrMdwNaam"></span></p>
+				<p><span class="vet lblFunctieBeh">Functie: </span><span id="aanvrFunc"></span></p>
+				<p><span class="vet lblAfdBeh">Afdeling: </span><span id="aanvrAfd"></span></p><br />
+
+				<div id="dagenAanvraag" style="margin-bottom: 15px;">
+				</div>
+
+				<label class="lblRedenAanvraagMdw vet">Reden aanvraag:</label>
+				<p id="txtRedenAanvraagMdw"></p>
+				<br/>
+				<label class="lblRedenBeh vet">Reden (optioneel bij goedkeuren):</label>
+				<textarea id="txaRedenAanvraagKeuren" name="txaReden" data-theme="a"></textarea>
+				<div style="z-index: 0; " class="ui-btn ui-input-btn ui-corner-all ui-shadow ui-btn-a"><input data-theme="b" id="btnGoedkeuren" class="btnGoedkeuren" type="submit" value="Goedkeuren" />Goedkeuren</div>
+				<div style="z-index: 0; " class="ui-btn ui-input-btn ui-corner-all ui-shadow ui-btn-a"><input data-theme="b" id="btnAfkeuren" class="btnAfkeuren" type="submit" value="Afkeuren" />Afkeuren</div>
+				<a style="text-decoration: none; z-index: 0; " href="#aanvragen"><div style="margin-bottom: 450px;" class="ui-btn ui-input-btn ui-corner-all ui-shadow ui-btn-a"><input data-theme="b" id="btnBehandelAndereAanvr" class="btnBehandelAndereAanvr" type="submit" value="Andere aanvraag behandelen" />Andere aanvraag behandelen</div></a>
+			</div>
+
+			<div data-role="panel" id="detailsAanvraag_panel" data-position="left" data-display="overlay" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
+				<div class="ui-panel-inner">
+					<a href="#detailsAanvraag" data-transition="none" data-rel="close" class='detailsAanvraag_hide_panel' style='display:none;'></a>
+					<ul class="menu">
+						<li><a href="#home" data-rel="close" data-transition="none"><img src="img/home.png" /><span class="lblMenuHome">Verlofsaldo</span><div class="clear-fix"></div></a></li>
+						<li><a href="#verlofAanv" data-rel="close" data-transition="none"><img src="img/kalender_black.png" /><span class="lblMenuVerlof">Verlof aanvragen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#historiek" data-rel="close" data-transition="none"><img src="img/history.png" /><span class="lblMenuHistoriek">Historiek</span><div class="clear-fix"></div></a></li>
+
+						<li class="menuBehandelen"><a href="#aanvragen" data-rel="close" data-transition="none"><img src="img/KalenderChecked.png" /><span class="lblMenuAanvragen">Aanvragen behandelen</span><div class="clear-fix"></div></a></li>
+
+						<li><a href="#Opties" data-rel="close" data-transition="none"><img src="img/opties.png" /><span class="lblMenuInst">Instellingen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#About" data-rel="close" data-transition="none"><img src="img/About.png" /><span>Liantis</span><div class="clear-fix"></div></a></li>
+						<li><a onclick="logout()"><img src="img/logout.png" /><span class="lblMenuLogout">Uitloggen</span><div class="clear-fix"></div></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="Opties" data-theme="b">
+			<div class="melding" onclick="hideMelding()">
+			</div>
+			<div data-role="header" class="header" data-position="fixed">
+				<div class="left"><a href="#opties_panel" data-transition="none"><img src="img/menu.png" /></a></div>
+				<div class="center"><h1><a href="#home">my.e-ok</a></h1></div>
+			</div>
+
+			<div data-role="content" class="ui-content" role="main">
+				<form>
+					<fieldset data-role="controlgroup">
+						<input onchange="changeLang()" type="radio" name="radio-choice-v-2" data-theme="a" id="rdbNl" value="on" checked="checked">
+						<label for="rdbNl">Nederlands</label>
+						<input onchange="changeLang()" type="radio" name="radio-choice-v-2" data-theme="a" id="rdbFr" value="off">
+						<label for="rdbFr">Français</label>
+						<input onchange="changeLang()" type="radio" name="radio-choice-v-2" data-theme="a" id="rdbEn" value="other">
+						<label for="rdbEn">English</label>
+					</fieldset>
+				</form>
+				<div id="opPageFooter"></div>
+			</div>
+
+			<div data-role="panel" id="opties_panel" data-position="left" data-display="overlay" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
+				<div class="ui-panel-inner">
+					<a href="#Opties" data-transition="none" data-rel="close" class='opties_hide_panel' style='display:none;'></a>
+					<ul class="menu">
+						<li><a href="#home" data-rel="close" data-transition="none"><img src="img/home.png" /><span class="lblMenuHome">Verlofsaldo</span><div class="clear-fix"></div></a></li>
+						<li><a href="#verlofAanv" data-rel="close" data-transition="none"><img src="img/kalender_black.png" /><span class="lblMenuVerlof">Verlof aanvragen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#historiek" data-rel="close" data-transition="none"><img src="img/history.png" /><span class="lblMenuHistoriek">Historiek</span><div class="clear-fix"></div></a></li>
+
+						<li class="menuBehandelen"><a href="#aanvragen" data-rel="close" data-transition="none"><img src="img/KalenderChecked.png" /><span class="lblMenuAanvragen">Aanvragen behandelen</span><div class="clear-fix"></div></a></li>
+
+						<li><a href="#Opties" data-rel="close" data-transition="none"><img src="img/opties.png" /><span class="lblMenuInst">Instellingen</span><div class="clear-fix"></div></a></li>
+						<li><a href="#About" data-rel="close" data-transition="none"><img src="img/About.png" /><span>Liantis</span><div class="clear-fix"></div></a></li>
+						<li><a onclick="logout()"><img src="img/logout.png" /><span class="lblMenuLogout">Uitloggen</span><div class="clear-fix"></div></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="page" id="About" data-theme="b">
+            <div data-role="header" class="header" data-position="fixed">
+                <div class="left"><a href="#about_panel" data-transition="none"><img src="img/menu.png" /></a></div>
+                <div class="center"><h1><a href="#home">my.e-ok</a></h1></div>
+                <div class="right"></div>
+            </div>
+            
+            <div data-role="content" class="ui-content" role="main">
+                <div id="contactGeg">
+                    <p>Groep ADMB</p>
+                    <p>medewerkersportaal.helpdesk@liantis.be</p>
+                </div>
+                <div id="abPageFooter">
+                    <img src="img/liantis_normal.svg" class="headerLogo-footer" />
+                </div>
+            </div>
+
+            <div data-role="panel" id="about_panel" data-position="left" data-display="overlay" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
+                <div class="ui-panel-inner">
+                    <a href="#About" data-transition="none" data-rel="close" class='about_hide_panel' style='display:none;'></a>
+                    <ul class="menu">
+                        <li><a href="#home" data-rel="close" data-transition="none"><img src="img/home.png" /><span class="lblMenuHome">Verlofsaldo</span><div class="clear-fix"></div></a></li>
+                        <li><a href="#verlofAanv" data-rel="close" data-transition="none"><img src="img/kalender_black.png" /><span class="lblMenuVerlof">Verlof aanvragen</span><div class="clear-fix"></div></a></li>
+                        <li><a href="#historiek" data-rel="close" data-transition="none"><img src="img/history.png" /><span class="lblMenuHistoriek">Historiek</span><div class="clear-fix"></div></a></li>
+                        <li class="menuBehandelen"><a href="#aanvragen" data-rel="close" data-transition="none"><img src="img/KalenderChecked.png" /><span class="lblMenuAanvragen">Aanvragen behandelen</span><div class="clear-fix"></div></a></li>
+                        <li><a href="#Opties" data-rel="close" data-transition="none"><img src="img/opties.png" /><span class="lblMenuInst">Instellingen</span><div class="clear-fix"></div></a></li>
+                        <li><a href="#About" data-rel="close" data-transition="none"><img src="img/About.png" /><span>Liantis</span><div class="clear-fix"></div></a></li>
+                        <li><a onclick="logout()"><img src="img/logout.png" /><span class="lblMenuLogout">Uitloggen</span><div class="clear-fix"></div></a></li>
+                    </ul>
+                </div>
+            </div>
+		</div>
+		
+		<script src="js/DatabaseConnection.js"></script>
+		<script src="js/jquery-ui-1.10.4.custom.js"></script>
+		<script src="js/Vertalen.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/Home.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+		<script>
+			var APIVersion = '2';
+
+			$( "#Toon-kalender" ).bind({
+				popupafterclose: function (event, ui) {
+					pageHeightSet = false;
+					$('#verlofAanv').css('height', initialPageHeight);
+					initialPageHeight = 0;
+				}
+			});
+
+			$('#colSetDetailAanvraag.ui-collapsible.ui-collapsible-collapsed').attr('data-collapsed', false).removeClass("ui-collapsible-collapsed").find('.ui-collapsible-content').removeClass('ui-collapsible-content-collapsed');
+			$('#loadingDivDetailsDagen').css('display', 'none');
+			var verlofSaldi = null;
+			var historiekItems;
+
+			// wijzigen van het weer te geven item in de saldi tabel
+			function changePrestC() {
+				initSaldiTable();
+				var selectedPCode = $('#cboPrestatieC')[0].selectedIndex;
+				$('#tblPCodes thead tr')[0].innerHTML = '<th></th><th>' + verlofSaldi[selectedPCode].omschrijving + '</th>';
+
+				/*$('#tblPCodes1')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].aantaldagen + '</td>';
+				$('#tblPCodes2')[0].innerHTML += '<td>' + Math.round(verlofSaldi[selectedPCode].gebruikt * 100) / 100 + '</td>';
+				$('#tblPCodes3')[0].innerHTML += '<td>' + Math.round(verlofSaldi[selectedPCode].aangevraagd * 100) / 100 + '</td>';
+				$('#tblPCodes4')[0].innerHTML += '<td>' + Math.round(verlofSaldi[selectedPCode].beschikbaar * 100) / 100 + '</td>';*/
+
+				if (verlofSaldi[selectedPCode].SaldoAanvraag == "D") {
+				    $('#tblPCodes1')[0].innerHTML += '<td>' + parseFloat(('' + verlofSaldi[selectedPCode].beginsaldo).replace(',', '.')).toFixed(2).replace('.', ',') + '</td>';
+				    $('#tblPCodes2')[0].innerHTML += '<td>' + (Math.round(parseFloat(('' + verlofSaldi[selectedPCode].gebruikt).replace(',', '.')) * 100, 2) / 100).toFixed(2).replace('.', ',') + '</td>';
+				    $('#tblPCodes3')[0].innerHTML += '<td>' + (Math.round(parseFloat(('' + verlofSaldi[selectedPCode].aangevraagd).replace(',', '.')) * 100, 2) / 100).toFixed(2).replace('.', ',') + '</td>';
+				    $('#tblPCodes4')[0].innerHTML += '<td>' + (Math.round(parseFloat(('' + verlofSaldi[selectedPCode].beschikbaar).replace(',', '.')) * 100, 2) / 100).toFixed(2).replace('.', ',') + '</td>';
+				    $('#tblPCodes5').css('display', 'table-row');
+				} else if (verlofSaldi[selectedPCode].SaldoAanvraag == "UM") {
+				    $('#tblPCodes1')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].beginsaldo + '</td>';
+				    $('#tblPCodes2')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].gebruikt + '</td>';
+				    $('#tblPCodes3')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].aangevraagd + '</td>';
+				    $('#tblPCodes4')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].beschikbaar + '</td>';
+				    $('#tblPCodes5').css('display', 'none');
+				} else if (verlofSaldi[selectedPCode].SaldoAanvraag == "UD") {
+				    $('#tblPCodes1')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].beginsaldo + '</td>';
+				    $('#tblPCodes2')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].gebruikt + '</td>';
+				    $('#tblPCodes3')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].aangevraagd + '</td>';
+				    $('#tblPCodes4')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].beschikbaar + '</td>';
+				    $('#tblPCodes5').css('display', 'none');
+				}
+
+				$('#tblPCodes5')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].aantalUren + '</td>';
+				$('#tblPCodes7')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].vandatum.split('T')[0].split('-')[2] + '/' + verlofSaldi[selectedPCode].vandatum.split('T')[0].split('-')[1] + '/' + verlofSaldi[selectedPCode].vandatum.split('T')[0].split('-')[0] + '</td>';
+				$('#tblPCodes6')[0].innerHTML += '<td>' + verlofSaldi[selectedPCode].voordatum.split('T')[0].split('-')[2] + '/' + verlofSaldi[selectedPCode].voordatum.split('T')[0].split('-')[1] + '/' + verlofSaldi[selectedPCode].voordatum.split('T')[0].split('-')[0] + '</td>';
+			}
+			// wijzigen van het weer te geven item in de historiek tabel
+			function changeHistItem() {
+				initHistTable();
+				var selectedPCode = $('#cboHistItems')[0].selectedIndex;
+				var datumStart = historiekItems[selectedPCode].start.split('T')[0];
+				var datumEind = historiekItems[selectedPCode].einde.split('T')[0];
+
+				$('#tblHist thead tr')[0].innerHTML = '<th></th><th>' + datumStart.split('-')[2] + '/' + datumStart.split('-')[0] + ' - ' + datumEind.split('-')[2] + '/' + datumEind.split('-')[1] + '/' + datumEind.split('-')[0] + '</th>';
+				$('#tblHist1')[0].innerHTML += '<td>' + datumStart.split('-')[2] + '/' + datumStart.split('-')[1] + '/' + datumStart.split('-')[0] + '</td>';
+				$('#tblHist2')[0].innerHTML += '<td>' + datumEind.split('-')[2] + '/' + datumEind.split('-')[1] + '/' + datumEind.split('-')[0] + '</td>';
+				$('#tblHist3')[0].innerHTML += '<td>' + historiekItems[selectedPCode].aantaldagen / 1000 + '</td>';
+				var aanvraagDatum = historiekItems[selectedPCode].datumaanvraag.split('T')[0];
+				$('#tblHist4')[0].innerHTML += '<td>' + aanvraagDatum.split('-')[2] + '/' + aanvraagDatum.split('-')[1] + '/' + aanvraagDatum.split('-')[0] + '</td>';
+				$('#tblHist5')[0].innerHTML += '<td>' + historiekItems[selectedPCode].status + '</td>';
+				$('#tblHist6')[0].innerHTML += '<td>' + historiekItems[selectedPCode].naam2 + '</td>';
+			}
+
+			var timeout;
+
+			// Dropdown om het selecteren van een jaar voorzien van jaartallen
+			var iJaar = new Date().getFullYear();
+			for (i = 0; i <= 1; i++) {
+				var option = document.createElement("option");
+				option.text = iJaar + i;
+				option.value = iJaar + i;
+				$('#cboJaar')[0].add(option);
+			}
+
+			// Verschillende data uit de 'cookies' halen
+			var mdwID = window.localStorage.getItem("mdwID");
+			var miRol = window.localStorage.getItem("miRol");
+			var jaar = $('#cboJaar')[0][$('#cboJaar')[0].selectedIndex].value;
+			var taal = window.localStorage.getItem("TaalKeuze");
+			if (taal == null) {
+				window.localStorage.setItem("TaalKeuze", 'nl');
+				taal = 'nl';
+			}
+
+			// Waardes uit de inputvelden van de datepicker verwijderen
+			// er kan geen datum getypt worden, er moet gebruik gemaakt worden van de datepickers
+			function clearVanDte() {
+				$('#dteVan').val('');
+				dteVanIngevuld = false;
+			}
+			function clearTotDte() {
+				$('#dteTot').val('');
+				dteTotIngevuld = false;
+			}
+
+			// Opmaak voor de overview datepicker voorzien
+			// overview datepicker = datepicker met de legende op
+			var initialHeight = 0;
+			function styleDteOverview() {
+				$('#dteVanPopup').css('display', 'none');
+				$('#dteTotPopup').css('display', 'none');
+				popupDte = '';
+				popupActive = false;
+
+				setDteStyle('#dteOverview');
+				popupActive = true;
+				popupDte = 'Overview';
+				firstclick = true;
+				kleurDisabledDagen(huidigeOverviewMaand, '#dteOverview', huidigOverviewJaar);
+				dteTarget = null;
+			}
+
+			var popupActive = false;
+			var popupDte = '';
+			var dteTarget = null;
+			// Tonen van de datum van datepicker
+			function showDteVanPopup(target) {
+				if ($('#dteTot').val() != '') {
+					var arrEinddag = $('#dteTot').val().split('-');
+					var einddag = new Date(arrEinddag[2], arrEinddag[1] - 1, arrEinddag[0]);
+					$("#dteVanPopup").datepicker("option", "maxDate", einddag);
+				} else
+					$("#dteVanPopup").datepicker("option", "maxDate", null);
+				var maand = $('#dteVanPopup .ui-datepicker-title span')[0].outerText;
+				var jaar = $('#dteVanPopup .ui-datepicker-title span:nth-child(2)')[0].outerText;
+				huidigeVanMaand = maandenHuidig.indexOf(maand) + 1;
+
+				setDteStyle('#dteVanPopup');
+				$('#dteVanPopup').css('display', 'inline');
+				popupActive = true;
+				popupDte = 'Van';
+
+				kleurDisabledDagen(huidigeVanMaand, '#dteVanPopup', jaar);
+				dteTarget = target;
+			}
+
+			// Tonen van de datum tot datepicker
+			function showDteTotPopup(target) {
+			    //$("#dteTotPopup").datepicker("option", "maxDate", new Date(new Date().getFullYear() + 1, 11, 31));
+				if ($('#dteVan').val() != '') {
+					var arrStartdag = $('#dteVan').val().split('-');
+					var startdag = new Date(arrStartdag[2], arrStartdag[1] - 1, arrStartdag[0]);
+					$("#dteTotPopup").datepicker("option", "minDate", startdag);
+				} else
+					$("#dteTotPopup").datepicker("option", "minDate", null);
+				var maand = $('#dteTotPopup .ui-datepicker-title span')[0].outerText;
+				var jaar = $('#dteTotPopup .ui-datepicker-title span:nth-child(2)')[0].outerText;
+				huidigeTotMaand = maandenHuidig.indexOf(maand) + 1;
+
+				setDteStyle('#dteTotPopup');
+				$('#dteTotPopup').css('display', 'inline');
+				popupActive = true;
+				popupDte = 'Tot';
+
+				kleurDisabledDagen(huidigeTotMaand, '#dteTotPopup', jaar);
+				dteTarget = target;
+			}
+
+			var initialPageHeight = 0;
+			var pageHeightSet = false;
+			// Click event om na te gaan wanneer bepaalde controls verborgen moeten worden
+			var firstclick = false;
+			window.onclick = function (e) {
+				if (e.target.id.indexOf('dte') != -1) {
+					$('#dteVanPopup').css('display', 'none');
+					$('#dteTotPopup').css('display', 'none');
+					$('#' + e.target.id + 'Popup').css('display', 'inline');
+				} else {
+					if (popupActive) {
+						if (e.target.className.indexOf('ui-datepicker') == -1 && !firstclick) {
+							$('#dteVanPopup').css('display', 'none');
+							$('#dteTotPopup').css('display', 'none');
+							popupActive = false;
+							popupDte = '';
+						}
+						firstclick = false;
+					}
+
+					if (popupActive != '') {
+						// Er werd geklikt op een pijltje om de volgende/vorige maand te selecteren in een datepicker
+						// Huidige maand variabele updaten en de verschillende feest-/verlofdagen kleuren in de datepicker
+						if (popupDte == "Van") {
+							if (e.target.className.indexOf('ui-datepicker-prev') != -1) {
+								huidigeVanMaand -= 1;
+
+								if (huidigeVanMaand < 1) {
+									huidigeVanMaand = 12;
+									huidigVanJaar -= 1;
+								}
+
+								kleurDisabledDagen(huidigeVanMaand, '#dteVanPopup', huidigVanJaar);
+							}
+							if (e.target.className.indexOf('ui-datepicker-next') != -1) {
+								huidigeVanMaand += 1;
+
+								if (huidigeVanMaand > 12) {
+									huidigeVanMaand = 1;
+									huidigVanJaar += 1;
+								}
+
+								kleurDisabledDagen(huidigeVanMaand, '#dteVanPopup', huidigVanJaar);
+							}
+						} else if (popupDte == 'Tot') {
+							if (e.target.className.indexOf('ui-datepicker-prev') != -1) {
+								huidigeTotMaand -= 1;
+
+								if (huidigeTotMaand < 1) {
+									huidigeTotMaand = 12;
+									huidigTotJaar -= 1;
+								}
+
+								kleurDisabledDagen(huidigeTotMaand, '#dteTotPopup', huidigTotJaar);
+							}
+							if (e.target.className.indexOf('ui-datepicker-next') != -1) {
+								huidigeTotMaand += 1;
+
+								if (huidigeTotMaand > 12) {
+									huidigeTotMaand = 1;
+									huidigTotJaar += 1;
+								}
+
+								kleurDisabledDagen(huidigeTotMaand, '#dteTotPopup', huidigTotJaar);
+							}
+						} else if (popupDte == 'Overview') {
+							if (!pageHeightSet) {
+								pageHeightSet = true;
+								initialPageHeight = $('#verlofAanv').css('height');
+								$('#verlofAanv').css('height', document.getElementById('Toon-kalender-popup').offsetHeight + 'px');
+							}
+
+							if (e.target.className.indexOf('ui-datepicker-prev') != -1) {
+								huidigeOverviewMaand -= 1;
+
+								if (huidigeOverviewMaand > 12) {
+									huidigeOverviewMaand = 1;
+									huidigOverviewJaar -= 1;
+								}
+
+								kleurDisabledDagen(huidigeOverviewMaand, '#dteOverview', huidigOverviewJaar);
+							}
+							if (e.target.className.indexOf('ui-datepicker-next') != -1) {
+								huidigeOverviewMaand += 1;
+
+								if (huidigeOverviewMaand > 12) {
+									huidigeOverviewMaand = 1;
+									huidigOverviewJaar += 1;
+								}
+
+								kleurDisabledDagen(huidigeOverviewMaand, '#dteOverview', huidigOverviewJaar);
+							}
+						}
+					}
+				}
+			}
+
+			// Functie voor het voorzien van de opmaak van de datepickers
+			function setDteStyle(selector) {
+				$(selector).addClass('ui-shadow');
+				$(selector + ' > div > div').removeClass('ui-corner-all');
+				$(selector + ' > div > div').addClass('ui-body-a ui-corner-top');
+				$(selector + ' > div > div > a:nth-child(1)').removeClass('ui-link').addClass('ui-btn ui-btn-icon-notext ui-btn-inline ui-icon-arrow-l ui-shadow');
+				$(selector + ' > div > div > a:nth-child(2)').removeClass('ui-link').addClass('ui-btn ui-btn-icon-notext ui-btn-inline ui-icon-arrow-r ui-shadow');
+				$(selector + ' table').addClass('mobile-enhanced');
+				$(selector + ' table thead th').addClass('ui-bar-a');
+				$(selector + ' table tbody td').addClass('ui-body-a');
+
+				$(".ui-datepicker-prev").click(function () {
+					setDteStyle(selector);
+				});
+
+				$(".ui-datepicker-next").click(function () {
+					setDteStyle(selector);
+				});
+			}
+
+			// Arrays met de verschillende maanden/dagen in de beschikbare talen
+			var dagenKortNl = ["Zo", "Ma", "Di", "Wo", "Do", "Vr", "Za"];
+			var dagenKortFr = ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"];
+			var dagenKortEn = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+			var dagenKortHuidig = dagenKortNl;
+			var dagenNl = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
+			var dagenFr = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+			var dagenEn = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+			var dagenHuidig = dagenNl;
+			var maandenNl = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+			var maandenFr = ["Janvier", "Fëvrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+			var maandenEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+			var maandenHuidig = maandenNl;
+
+			var dteVanIngevuld = false;
+			var dteTotIngevuld = false;
+
+			var reloadDtes = false; // veriabele wordt gebruikt in jquery-ui-1.10.5.custom.js
+
+			// Datepickers initialiseren
+			$('.customDatepicker').datepicker({
+				firstDay: 1,
+				dateFormat: "dd-mm-yy",
+				dayNamesMin: dagenKortHuidig,
+				dayNames: dagenHuidig,
+				monthNames: maandenHuidig,
+				minDate: new Date(jaar, 0, 1),
+				//beforeShowDay: $.datepicker.noWeekends,
+				onSelect: function (dateText, e) {
+					if (dteTarget != null) {
+						$('#' + dteTarget).val(dateText);
+						$('#dteTotPopup').css('display', 'none');
+						$('#dteVanPopup').css('display', 'none');
+						popupActive = false;
+
+						// Bij het selecteren van een datum nagaan naar welke input het geschreven moet worden
+						if (dteTarget == 'dteVan')
+							dteVanIngevuld = true;
+						else if (dteTarget == "dteTot")
+							dteTotIngevuld = true;
+						if (dteVanIngevuld && dteTotIngevuld) {
+							$("#btnDetailDagen").button("enable");
+							$('#btnDetailDagen').parent().css('color', '').css('background-color', '').css('cursor', 'pointer');
+						}
+						else {
+							$("#btnDetailDagen").button("disable");
+							$('#btnDetailDagen').parent().css('color', '#aaa').css('background-color', '#ddd').css('cursor', 'default');
+						}
+					}
+				}
+			});
+			setDteStyle('.customDatepicker');
+
+			// Een andere taal selecteren
+			function changeLang() {
+				if ($('#rdbNl')[0].checked == true) {
+					window.localStorage.removeItem("TaalKeuze");
+					window.localStorage.setItem("TaalKeuze", 'nl');
+				}
+				else if ($('#rdbFr')[0].checked == true) {
+					window.localStorage.removeItem("TaalKeuze");
+					window.localStorage.setItem("TaalKeuze", 'fr');
+				}
+				else if ($('#rdbEn')[0].checked == true) {
+					window.localStorage.removeItem("TaalKeuze");
+					window.localStorage.setItem("TaalKeuze", 'en');
+				}
+				taal = window.localStorage.getItem("TaalKeuze");
+				vertaalTekst(taal);
+				reloadSaldi();
+				reloadHist();
+				opvullenRPTKleuren();
+				ophalenFeestdagen();
+				if (miRol != null && (miRol.indexOf('myHRM') != -1 || miRol.indexOf('myLG') != -1 || mirol.indexOf('myHR') != -1))
+					getAanvragenLGHR();
+			}
+
+			// De huidige waardes in de saldi tabel weghalen
+			function initSaldiTable() {
+				$('#tblPCodes thead tr')[0].innerHTML = $('#tblPCodes thead tr th:first-child')[0].outerHTML;
+				$('#tblPCodes1')[0].innerHTML = $('#tblPCodes1 th')[0].outerHTML;
+				$('#tblPCodes2')[0].innerHTML = $('#tblPCodes2 th')[0].outerHTML;
+				$('#tblPCodes3')[0].innerHTML = $('#tblPCodes3 th')[0].outerHTML;
+				$('#tblPCodes4')[0].innerHTML = $('#tblPCodes4 th')[0].outerHTML;
+				$('#tblPCodes5')[0].innerHTML = $('#tblPCodes5 th')[0].outerHTML;
+				$('#tblPCodes6')[0].innerHTML = $('#tblPCodes6 th')[0].outerHTML;
+				$('#tblPCodes7')[0].innerHTML = $('#tblPCodes7 th')[0].outerHTML;
+			}
+
+			// Herladen van de saldi
+			function reloadSaldi() {
+				$('#cboJaar').selectmenu();
+				$('#cboJaar').selectmenu("disable");
+				// Saldo van het vorige jaar verwijderen
+				initSaldiTable();
+				// Nieuwe saldo ophalen
+				jaar = $('#cboJaar')[0][$('#cboJaar')[0].selectedIndex].value;
+				taal = window.localStorage.getItem("TaalKeuze");
+				getSaldi();
+			}
+
+			// De huidige waardes in de historiek tabel weghalen
+			function initHistTable() {
+				$('#tblHist thead tr')[0].innerHTML = $('#tblHist thead tr th:first-child')[0].outerHTML;
+				$('#tblHist1')[0].innerHTML = $('#tblHist1 th')[0].outerHTML;
+				$('#tblHist2')[0].innerHTML = $('#tblHist2 th')[0].outerHTML;
+				$('#tblHist3')[0].innerHTML = $('#tblHist3 th')[0].outerHTML;
+				$('#tblHist4')[0].innerHTML = $('#tblHist4 th')[0].outerHTML;
+				$('#tblHist5')[0].innerHTML = $('#tblHist5 th')[0].outerHTML;
+				$('#tblHist6')[0].innerHTML = $('#tblHist6 th')[0].outerHTML;
+			}
+
+			// Herladen van de historiek van de gebruiker
+			function reloadHist() {
+				if (histPageInit) {
+					$('#cboHistItems').selectmenu();
+					$('#cboHistItems').selectmenu("disable");
+				}
+
+				initHistTable();
+				jaar = $('#cboJaar')[0][$('#cboJaar')[0].selectedIndex].value;
+				taal = window.localStorage.getItem("TaalKeuze");
+				getHistoriek();
+			}
+
+			var loadingSaldi = true;
+			// Ophalen en weergeven van de saldi van de gebruiker
+			function getSaldi() {
+				loadingSaldi = true;
+				$('#loadingDivSaldi').css('display', 'inline');
+				$("#cboPrestatieC").selectmenu();
+				$("#cboPrestatieC").selectmenu("disable");
+				$.ajax({
+					headers: { 'Access-Control-Allow-Origin': "*" },
+					url: url + 'api/Medewerker/GetVerlofSaldo/?mwId=' + mdwID + '&jaar=' + jaar + '&taal=' + taal,
+					cache: false,
+					type: 'GET',
+					contentType: 'application/json; charset=utf-8',
+					success: function (data) {
+						var revealCbo = true;
+						if (data.length == 0) {
+							revealCbo = false;
+							if ($.mobile.activePage.attr('id') == 'home') {
+								melding(msgGeenSaldi, 5000, 'warning');
+								$('#cboPrestatieC')[0].innerHTML = '';
+								$("#cboPrestatieC").selectmenu();
+							}
+						} else {
+							verlofSaldi = data;
+							verlofSaldi.sort(sorteerSaldi);
+
+							// Select voor het selecteren van een item om weer te geven leeg maken en opnieuw opvullen
+							$('#cboPrestatieC')[0].innerHTML = '';
+							$.each(verlofSaldi, function (key, pcode) {
+								var option = document.createElement("option");
+								option.text = pcode.omschrijving;
+								option.value = pcode.prestatiecodeID;
+								$('#cboPrestatieC')[0].add(option);
+							});
+							if ($.mobile.activePage.attr("id") == 'home')
+								$("#cboPrestatieC").selectmenu("refresh", true);
+							changePrestC();
+						}
+						$('#loadingDivSaldi').css('display', 'none');
+						$('#cboJaar').selectmenu("enable");
+						if (revealCbo) {
+							$('#cboPrestatieC').selectmenu();
+							$('#cboPrestatieC').selectmenu("enable");
+						}
+
+						loadingSaldi = false;
+					}
+				});
+			}
+			getSaldi();
+
+			// Ophalen van de verschillende historiek records van de gebruiker
+			var loadingHist = true;
+			function getHistoriek() {
+				loadingHist = true;
+				$('#loadingDivHist').css('display', 'inline');
+				$.ajax({
+					headers: { 'Access-Control-Allow-Origin': "*" },
+					url: url + 'api/Medewerker/GetHistoriek/?mwId=' + mdwID + '&jaar=' + jaar + '&status=1,2,3,4' + '&taal=' + taal,
+					cache: false,
+					type: 'GET',
+					contentType: 'application/json; charset=utf-8',
+					success: function (data) {
+						if (data.length == 0) {
+							if ($.mobile.activePage.attr('id') == 'historiek') {
+								melding(msgGeenHistoriek, 5000, 'warning');
+							}
+						}
+						else {
+							historiekItems = data;
+
+							// Select voor het selecteren van een item om weer te geven leeg maken en opnieuw opvullen
+							$('#cboHistItems')[0].innerHTML = '';
+							$.each(historiekItems, function (key, histItem) {
+								var datumStart = histItem.start.split('T')[0];
+								var datumEind = histItem.einde.split('T')[0];
+
+								var option = document.createElement("option");
+								option.text = datumStart.split('-')[2] + '/' + datumStart.split('-')[1] + '/' + datumStart.split('-')[0] + ' - ' + datumEind.split('-')[2] + '/' + datumEind.split('-')[1] + '/' + datumEind.split('-')[0];
+								$('#cboHistItems')[0].add(option);
+							});
+							if ($.mobile.activePage.attr("id") == 'historiek')
+								$("#cboHistItems").selectmenu("refresh", true);
+							changeHistItem();
+						}
+						$('#loadingDivHist').css('display', 'none');
+						if (histPageInit) {
+							$('#cboHistItems').selectmenu();
+							$('#cboHistItems').selectmenu("enable");
+						}
+
+						loadingHist = false;
+					}
+				});
+			}
+			getHistoriek();
+
+			// Ophalen van de verschillende prestatiecodes en bijhorend kleurtje op in de legende weer te geven
+			function opvullenRPTKleuren() {
+
+				$.ajax({
+					headers: { 'Access-Control-Allow-Origin': "*" },
+					url: url + 'api/Medewerker/GetRPTKleuren/?mdwId=' + mdwID + '&iJaar=' + new Date().getFullYear() + '&sTaal=' + taal,
+					cache: false,
+					type: 'GET',
+					contentType: 'application/json; charset=utf-8',
+					success: function (data) {
+						var legende = '';
+						$.each(data, function (key, prestatiecode) {
+							legende += '<div><div class="kleur" style="background-color:' + prestatiecode.kleur + ';"></div><p>' + prestatiecode.omschrijving + '</p></div>';
+						});
+						$('#Legende > div')[0].innerHTML = legende;
+					}
+				});
+			}
+			opvullenRPTKleuren();
+
+			// Functie voor het kleuren van de verschillende feest-/verlofdagen
+			function kleurDisabledDagen(huidigeMaand, dtpId, huidigjaar) {
+				// Alle feest-/verlofdagen overlopen en op de datepicker kleuren indien nodig
+			    $.each(uitTeSchakelenDagen, function (key, value) {
+					// Als de dag plaatsvindt in de huidig weergegeven maand --> dag kleuren
+					var datumUitschakelen = value.datum;
+					if (value.altDatum != '' && value.altDatum != null)
+						datumUitschakelen = value.altDatum;
+
+					if (parseInt(datumUitschakelen.split('-')[1]) == huidigeMaand && parseInt(datumUitschakelen.split('-')[2]) == huidigjaar) {
+					    var datumMaand = new Date(huidigjaar, huidigeMaand - 1, parseInt(datumUitschakelen.split('-')[0]));
+
+					    // Bepalen in welke week van de maand de dag plaatsvindt
+						var weekInMaand = Math.ceil(Math.abs(datumMaand.getDay() - parseInt(datumUitschakelen.split('-')[0])) / 7);
+						var weekcheck = datumMaand.getDay() - parseInt(datumUitschakelen.split('-')[0]);
+						if (weekcheck <= 0)
+							weekInMaand += 1;
+						// Bepalen de hoeveelste dag van de week de dag plaatsvindt
+						var dagInWeek = datumMaand.getDay();
+
+						// De dag inkleuren in de datepicker
+						var selector = dtpId + ' tbody tr:nth-child(' + weekInMaand + ') td:nth-child(' + dagInWeek + ')';
+						if(value.dagDeel == 'dag')
+							$(selector).css('background-color', value.kleur);
+						else if (value.dagDeel == 'vm') {
+							var defaultValue = '';
+
+							if ($(selector)[0].style.background != '') {
+								var prevKleur = $(selector)[0].style.background.substr($(selector)[0].style.background.indexOf('rgb'), $(selector)[0].style.background.length - $(selector)[0].style.background.indexOf('rgb')).split(')')[0] + ')';
+								defaultValue = 'linear-gradient(' + value.kleur + ' 50%, ' + prevKleur + ' 50%)';
+
+								$(selector).css('background', defaultValue);
+								$(selector).css('background', '-o-' + defaultValue);
+								$(selector).css('background', '-moz-' + defaultValue);
+								$(selector).css('background', '-webkit-' + defaultValue);
+							}
+							else {
+								defaultValue = 'linear-gradient(' + value.kleur + ' 50%, white 50%)';
+
+								$(selector).css('background', defaultValue);
+								$(selector).css('background', '-o-' + defaultValue);
+								$(selector).css('background', '-moz-' + defaultValue);
+								$(selector).css('background', '-webkit-' + defaultValue);
+							}
+						}
+						else if (value.dagDeel == 'nm') {
+							var defaultValue = '';
+							if ($(selector)[0].style.background != '') {
+								var prevKleur = $(selector)[0].style.background.substr($(selector)[0].style.background.indexOf('rgb'), $(selector)[0].style.background.length - $(selector)[0].style.background.indexOf('rgb')).split(')')[0] + ')';
+								defaultValue = 'linear-gradient(' + prevKleur + ' 50%, ' + value.kleur + ' 50%)';
+
+								$(selector).css('background', defaultValue);
+								$(selector).css('background', '-o-' + defaultValue);
+								$(selector).css('background', '-moz-' + defaultValue);
+								$(selector).css('background', '-webkit-' + defaultValue);
+							}
+							else {
+								defaultValue = 'linear-gradient(white 50%, ' + value.kleur + ' 50%)';
+								$(selector).css('background', defaultValue);
+								$(selector).css('background', '-o-' + defaultValue);
+								$(selector).css('background', '-moz-' + defaultValue);
+								$(selector).css('background', '-webkit-' + defaultValue);
+							}
+						}
+					}
+				});
+
+				// Als er in het weekend niet gewerkt wordt dan worden de weekends in ge grijs gekleurd
+				if (!weekendWerk) {
+					for (i = 1; i <= $(dtpId + ' tbody tr').length; i++) {
+						selector = dtpId + ' tbody tr:nth-child(' + i + ') td:nth-child(6)';
+						if ($(selector).children().length > 0)
+							$(selector).css('background-color', '#B0B0B0');
+						selector = dtpId + ' tbody tr:nth-child(' + i + ') td:nth-child(7)';
+						if ($(selector).children().length > 0)
+							$(selector).css('background-color', '#B0B0B0');
+					}
+				}
+			}
+
+			var huidigeVanMaand = new Date().getMonth() + 1;
+			var huidigVanJaar = new Date().getFullYear();
+			var huidigeTotMaand = new Date().getMonth() + 1;
+			var huidigTotJaar = new Date().getFullYear();
+			var huidigeOverviewMaand = new Date().getMonth() + 1;
+			var huidigOverviewJaar = new Date().getFullYear();
+			var uitTeSchakelenDagen = null;
+			var weekendWerk = true;
+			var loadingFeest = false;
+			var dteDisabled = false;
+
+			// Ophalen van alle feest-/verlofdagen
+			function ophalenFeestdagen() {
+				loadingFeest = true;
+				$.ajax({
+					headers: { 'Access-Control-Allow-Origin': "*" },
+					url: url + 'api/Medewerker/GetFeestdagen/?mwId=' + mdwID + '&jaar=' + new Date().getFullYear() + '&sTaal=' + taal,
+					cache: false,
+					type: 'GET',
+					contentType: 'application/json; charset=utf-8',
+					success: function (data) {
+						// De opgehaalde dagen in een array opslaan
+						// Deze lijst wordt pas overlopen/toegepast bij het weergeven/navigeren in een datepicker
+						loadingFeest = false;
+						uitTeSchakelenDagen = data;
+						if (dteDisabled) {
+							$('#dteVan').textinput("option", "disabled", false);
+							$('#dteTot').textinput("option", "disabled", false);
+							dteDisabled = false;
+						}
+						if (data.length != 0)
+							weekendWerk = data[0].werkWeekend;
+					}
+				});
+			}
+			ophalenFeestdagen();
+
+			var DagenVoorVerlofAanvraag;
+			// De dagen ophalen waarvoor effectief verlof voor aangevraagd kan worden
+			// aan de hand van de periode die door de gebruiker werd opgegeven
+			function haalDagenOp() {
+				$('#loadingDivDetailsDagen').css('display', 'inline');
+			    // gegevens voorsturen naar de API
+
+				if ($('#dteVan').val().substr(6, 4) == $('#dteTot').val().substr(6, 4)) {
+				    $.ajax({
+				        headers: { 'Access-Control-Allow-Origin': "*" },
+				        url: url + 'api/VerlofAanvragen/GetRequestedDagen/?mwId=' + mdwID + '&startdag=' + $('#dteVan').val() + '&einddag=' + $('#dteTot').val() + '&sTaal=' + taal,
+				        cache: false,
+				        type: 'GET',
+				        contentType: 'application/json; charset=utf-8',
+				        success: function (data) {
+				            // Als er een fout plaatsvond deze weergeven aan de gebruiker
+				            if (typeof data == 'string')
+				                melding(data, 5000, 'error');
+				            else {
+				                DagenVoorVerlofAanvraag = data;
+				                $("#colSet")[0].innerHTML = '';
+				                var content = '';
+
+				                loadingSaldi = true;
+				                $('#loadingDivSaldi').css('display', 'inline');
+				                $("#cboPrestatieC").selectmenu();
+				                $("#cboPrestatieC").selectmenu("disable");
+
+				                var teSelecterenIndex = $('#cboJaar')[0].selectedIndex;
+				                $.each($('#cboJaar')[0], function (key, val) {
+				                    if (val.value == $('#dteVan').val().substr(6, 4)) {
+				                        teSelecterenIndex = key;
+				                    }
+				                });
+				                $('#cboJaar')[0].selectedIndex = teSelecterenIndex;
+				                jaar = $('#cboJaar')[0][$('#cboJaar')[0].selectedIndex].value;
+				                $.ajax({
+				                    headers: { 'Access-Control-Allow-Origin': "*" },
+				                    url: url + 'api/Medewerker/GetVerlofSaldo/?mwId=' + mdwID + '&jaar=' + jaar + '&taal=' + taal,
+				                    cache: false,
+				                    type: 'GET',
+				                    contentType: 'application/json; charset=utf-8',
+				                    success: function (data) {
+				                        var revealCbo = true;
+				                        if (data.length == 0) {
+				                            revealCbo = false;
+				                            if ($.mobile.activePage.attr('id') == 'home') {
+				                                melding(msgGeenSaldi, 5000, 'warning');
+				                                $('#cboPrestatieC')[0].innerHTML = '';
+				                                $("#cboPrestatieC").selectmenu();
+				                            }
+				                        } else {
+				                            verlofSaldi = data;
+				                            verlofSaldi.sort(sorteerSaldi);
+
+				                            // Select voor het selecteren van een item om weer te geven leeg maken en opnieuw opvullen
+				                            $('#cboPrestatieC')[0].innerHTML = '';
+				                            $.each(verlofSaldi, function (key, pcode) {
+				                                var option = document.createElement("option");
+				                                option.text = pcode.omschrijving;
+				                                option.value = pcode.prestatiecodeID;
+				                                $('#cboPrestatieC')[0].add(option);
+				                            });
+				                            if ($.mobile.activePage.attr("id") == 'home')
+				                                $("#cboPrestatieC").selectmenu("refresh", true);
+				                            changePrestC();
+				                        }
+				                        $('#loadingDivSaldi').css('display', 'none');
+				                        $('#cboJaar').selectmenu("enable");
+				                        if (revealCbo) {
+				                            $('#cboPrestatieC').selectmenu();
+				                            $('#cboPrestatieC').selectmenu("enable");
+				                        }
+
+				                        loadingSaldi = false;
+
+				                        // Een lijst van alle opgehaalde dagen weergeven op de #DetailsDagen pagina
+				                        for (i = 0; i < DagenVoorVerlofAanvraag.length; i++) {
+				                            var dag = new Date(DagenVoorVerlofAanvraag[i].dag.split('T')[0].split('-')[0], DagenVoorVerlofAanvraag[i].dag.split('T')[0].split('-')[1] - 1, DagenVoorVerlofAanvraag[i].dag.split('T')[0].split('-')[2]);
+				                            var dagNaam = dagenHuidig[dag.getDay()];
+				                            var dagNummer = dag.getDate();
+				                            var maandNaam = maandenHuidig[dag.getMonth()];
+				                            var datumJaar = dag.getFullYear();
+
+				                            // Toevoegen van de datum aan de header van de collapsible
+				                            content += "<div data-role='collapsible' data-theme='a' id='collap" + i + "' data-collapsed='true'><h3>" + dagNaam + " " + dagNummer + " " + maandNaam + " " + datumJaar + "</h3><select id='collapSel" + i + "' class='collapSelDagen'>";
+
+				                            // Alle prestatieCodes toevoegen aan de select in de collapsible
+				                            var dagenOver = false;
+				                            var teSelecterenIndex = 0;
+				                            for (y = 0; y < verlofSaldi.length; y++) {
+				                                if (verlofSaldi[y].prestatiecodeID == DagenVoorVerlofAanvraag[i].prestatiecodeID) {
+				                                    if (verlofSaldi[y].aantalDagen > 0) {
+				                                        dagenOver = true;
+				                                        teSelecterenIndex = y;
+				                                    }
+				                                }
+				                            }
+				                            if (!dagenOver) {
+				                                var iTeller = 0;
+				                                while (verlofSaldi[iTeller].aantalDagen <= 0) {
+				                                    if (iTeller + 1 < verlofSaldi.length) {
+				                                        iTeller += 1;
+				                                    }
+				                                    else {
+				                                        break;
+				                                    }
+				                                }
+				                                if (iTeller < verlofSaldi.length && verlofSaldi[iTeller].aantalDagen > 0) {
+				                                    teSelecterenIndex = iTeller;
+				                                }
+				                            }
+
+				                            verlofSaldi[teSelecterenIndex].aantalDagen -= 1;
+				                            for (y = 0; y < verlofSaldi.length; y++) {
+				                                var aantBeschikbaar = parseFloat(('' + verlofSaldi[y].beschikbaar).replace(',', '.'));
+				                                if (verlofSaldi[y].isRecup) {
+				                                    aantBeschikbaar += parseFloat(('' + verlofSaldi[y].urenInNegatief).replace(',', '.'));
+				                                }
+				                                if (aantBeschikbaar > 0) {
+				                                    if (y == teSelecterenIndex) {
+				                                        content += '<option value="' + verlofSaldi[y].prestatiecodeID + '" selected>' + verlofSaldi[y].omschrijving + '</option>';
+				                                    } else {
+				                                        content += '<option value="' + verlofSaldi[y].prestatiecodeID + '">' + verlofSaldi[y].omschrijving + '</option>';
+				                                    }
+				                                }
+				                            }
+
+				                            // Bepalen welke controls weergegeven moeten worden in de collapsible
+				                            // verlofInUren --> NumericalUpDown
+				                            // verlofInDagen --> Select
+
+				                            var aantalUur = DagenVoorVerlofAanvraag[i].aantaluur.split(':')[0];
+				                            if (aantalUur.length == 1) {
+				                                aantalUur = '0' + aantalUur;
+				                            }
+				                            aantalUur = aantalUur + ':' + DagenVoorVerlofAanvraag[i].aantaluur.split(':')[1];
+
+				                            if (!verlofSaldi[teSelecterenIndex].aanvragenInDagen) {
+				                                content += "</select><label>" + dynamicAantUur;
+
+				                                if (navigator.userAgent.match(/(IEMobile)/))
+				                                    content += "</label><input class='collapAantUur' id='collapTxt" + i + "' type='number' value='" + aantalUur + "' />";
+				                                else
+				                                    content += "</label><input class='collapAantUur' id='collapTxt" + i + "' type='time' value='" + aantalUur + "' />";
+				                                content += "<select style='display:none' id='collapDag" + i + "'>";
+				                            }
+				                            else {
+				                                content += "</select><label>" + dynamicDagdeel;
+
+				                                if (navigator.userAgent.match(/(IEMobile)/))
+				                                    content += "</label><input style='display:none' class='collapAantUur' id='collapTxt" + i + "' type='number' value='" + aantalUur + "' />";
+				                                else
+				                                    content += "</label><input style='display:none' class='collapAantUur' id='collapTxt" + i + "' type='time' value='" + aantalUur + "' />";
+				                                content += "<select id='collapDag" + i + "'>";
+				                            }
+				                            content += "<option value='D100'>" + dynamicDag + "</option>";
+				                            content += "<option value='V50'>" + dynamicVoormiddag + "</option>";
+				                            content += "<option value='N50'>" + dynamicNamiddag + "</option>";
+				                            content += "</select></div>";
+				                        }
+				                        // Een button btnDagenBevestigen toevoegen
+				                        content += "<div class='ui-btn ui-input-btn ui-corner-all ui-shadow ui-btn-a'>";
+				                        content += "<input data-theme='b' id='btnDagenBevestigen' type='submit' value='" + dynamicBtnDagenBevestigen + "' />" + dynamicBtnDagenBevestigen + "</input></div>";
+				                        $("#colSet")[0].innerHTML = content;
+
+				                        for (i = 0; i < DagenVoorVerlofAanvraag.length; i++) {
+				                            switch (DagenVoorVerlofAanvraag[i].dagID) {
+				                                case 'D100':
+				                                    $('#collapDag' + i)[0].selectedIndex = 0;
+				                                    break;
+				                                case 'V50':
+				                                    $('#collapDag' + i)[0].selectedIndex = 1;
+				                                    break;
+				                                case 'N50':
+				                                    $('#collapDag' + i)[0].selectedIndex = 2;
+				                                    break;
+				                                default:
+				                                    $('#collapDag' + i)[0].selectedIndex = 0;
+				                                    break;
+				                            }
+
+				                        }
+
+
+				                        if ($('select.collapSelDagen')[0].length > 0) {
+				                            // Navigeren naar de lijst van opgehaalde dagen
+				                            $('#aDetailsDagen').click();
+				                        } else {
+				                            melding(msgOnvoldoendeVerlof, 5000, 'error');
+				                        }
+				                    }
+				                });
+				            }
+				            $('#loadingDivDetailsDagen').css('display', 'none');
+				        }
+				    });
+				} else {
+				    melding(msgVerschJaren, 5000, 'error');
+				    $('#loadingDivDetailsDagen').css('display', 'none');
+				}
+			}
+
+			// Sorteren van saldi op basis van belang
+			function sorteerSaldi(a, b) {
+				if (a.belang == 0)
+					a.belang = 999999999;
+				if (b.belang == 0)
+					b.belang = 999999999;
+				if (a.belang < b.belang)
+					return -1;
+				if (a.belang > b.belang)
+					return 1;
+				return 0;
+			}
+			// Code die uitgevoegd wordt bij het laden van de #DetailsDagen pagina
+			$(document).on('pagebeforeshow', '#DetailsDagen', function () {
+				$('#colSet select').selectmenu();
+				$('#colSet .collapAantUur').textinput();
+				$("#btnDagenBevestigen").button();
+
+				$('#btnDagenBevestigen').click(function (event) {
+					event.preventDefault();
+					disableBijVerlofaanvraag();
+					dagenBevestigen();
+				});
+
+				for (i = 0; i < $('select.collapSelDagen').length; i++) {
+				    var selectedIndex = $($('select.collapSelDagen')[i])[0].selectedIndex;
+				    if (verlofSaldi[selectedIndex].aanvragenInDagen) {
+				        $('#collapTxt' + i).css('display', 'none');
+				        $('#collapDag' + i).parent().css('display', 'block');
+				    } else {
+				        $('#collapTxt' + i).css('display', 'inline');
+				        $('#collapDag' + i).parent().css('display', 'none');
+				    }
+				}
+
+				$('.collapSelDagen').change(function () {
+				    var index = this.id.substr(9, this.id.length - 9);
+				    if (verlofSaldi[this.selectedIndex].aanvragenInDagen) {
+				        $('#collapTxt' + index).css('display', 'none');
+				        $('#collapDag' + index).parent().css('display', 'block');
+				    } else {
+				        $('#collapTxt' + index).css('display', 'inline');
+				        $('#collapDag' + index).parent().css('display', 'none');
+				    }
+				});
+
+				$(".collapAantUur").bind("paste", function (e) {
+				    e.preventDefault();
+				});
+
+				$('#colSet div[data-role="collapsible"]').collapsible();
+
+				//if (navigator.userAgent.match(/(IEMobile)/)) {
+				$('.collapAantUur').keyup(function (e) {
+				    var selector = '#' + this.id;
+				    var timeValue = '';
+				    if (e.keyCode == 8)
+				        timeValue = $(selector).val();
+				    else
+				        timeValue = $(selector).val().substr(0, $(selector).val().length - 1);
+				    if (timeValue.length != 5 || e.keyCode == 8) {
+				        var keyPressed = e.keyCode - 48;
+				        if ((keyPressed > -1 && keyPressed < 10) || e.keyCode == 8) {
+				            if (e.keyCode == 8) {
+				                if (timeValue.length == 2) {
+				                    timeValue = timeValue.substr(0, timeValue.length - 1);
+				                }
+				            }
+				            else {
+				                timeValue = timeValue + keyPressed;
+				                if (timeValue.length == 4 && keyPressed > 5) {
+				                    timeValue = timeValue.substr(0, timeValue.length - 1);
+				                }
+				                if (timeValue.length == 2) {
+				                    timeValue = timeValue + ':';
+				                }
+				            }
+				        }
+				    }
+				    $(selector).val(timeValue)
+				});
+				//}
+			});
+			// Code die uitgevoegd wordt bij het laden van de #home pagina
+			var appStartup = true;
+			$(document).on('pagebeforeshow', '#home', function () {
+				if (appStartup) {
+					$("#home_panel").panel("open");
+					appStartup = false;
+					vertaalTekst(taal);
+					// Click event voor het ophalen van de dagen waarvoor effectief verlof voor aangevraagd kan worden
+					$("#btnDetailDagen").click(function (event) {
+						$("#btnDagenBevestigen").button("enable");
+
+						event.preventDefault();
+						haalDagenOp()
+					});
+				}
+
+				// Als de ingelogde medewerkers HRM|LG is worden de te behandelen aanvragen opgehaald
+				if (miRol != null && (miRol.indexOf('myHRM') != -1 || miRol.indexOf('myLG') != -1 || miRol.indexOf('myHR') != -1))
+					getAanvragenLGHR();
+				else
+					$('li.menuBehandelen').css('display', 'none');
+
+				if (loadingSaldi) {
+					$('#cboJaar').selectmenu("disable");
+					$('#cboPrestatieC').selectmenu("disable");
+				}
+
+				$("#cboPrestatieC").selectmenu("refresh", true);
+			});
+			// Code die uitgevoegd wordt bij het laden van de #historiek pagina
+			var histPageInit = false;
+			$(document).on('pagebeforeshow', '#historiek', function () {
+				if (loadingHist) {
+					$('#cboHistItems').selectmenu("disable");
+				}
+				if ($('#loadingDivHist')[0].style.display == 'none' && (historiekItems == undefined || historiekItems == null)) {
+					melding(msgGeenHistoriek, 5000, 'warning');
+					$('#cboHistItems').selectmenu("disable");
+				}
+
+				$("#cboHistItems").selectmenu("refresh", true);
+				histPageInit = true;
+			});
+			// Code die uitgevoegd wordt bij het laden van de #Opties pagina
+			$(document).on('pagebeforeshow', '#Opties', function () {
+				switch (taal) {
+					case 'nl':
+						$("input[type='radio']:first").attr("checked", "checked");
+						break;
+					case 'fr':
+						$("input[type='radio']:eq(1)").attr("checked", "checked");
+						break;
+					case 'en':
+						$("input[type='radio']:last").attr("checked", "checked");
+						break;
+				}
+				$("input[type='radio']").checkboxradio().checkboxradio("refresh");
+
+				var deviceWidth = document.documentElement.clientWidth - 16;
+				$('#opPageFooter').css('width', deviceWidth);
+				$('#opPageFooter').css('text-align', 'center');
+				$('#opPageFooter').css('position', 'absolute');
+				$('#opPageFooter').css('bottom', '0');
+				$('#opPageFooter').css('margin-bottom', '20px');
+			});
+			// Code die uitgevoegd wordt bij het laden van de #verlofAanv pagina
+			$(document).on('pagebeforeshow', '#verlofAanv', function () {
+				if (loadingFeest) {
+					$('#dteVan').textinput("option", "disabled", true);
+					$('#dteTot').textinput("option", "disabled", true);
+				}
+				$('#txaRedenVal').val('');
+				$('#dteVan').val('');
+				$('#dteTot').val('');
+				dteTotIngevuld = false;
+				dteVanIngevuld = false;
+				$("#btnDetailDagen").button();
+				$("#btnDetailDagen").button("disable");
+				$('#btnDetailDagen').parent().css('color', '#aaa').css('background-color', '#ddd').css('cursor', 'default');
+				dteDisabled = true;
+			});
+			$(document).on('pagebeforeshow', '#About', function () {
+				var deviceWidth = document.documentElement.clientWidth - 16;
+				$('#abPageFooter').css('width', deviceWidth);
+			});
+
+			// Het bevestigen van de aanvraag
+			function dagenBevestigen() {
+			    $('#loadingDivDetailD').css('display', 'inline');
+			    var UurLeegOfNr = false;
+			    // Lijst van alle aan te vragen dagen overlopen,
+			    // Controlleren of alles ingevuld is en de data opslaan in een object
+			    $.each(DagenVoorVerlofAanvraag, function (key, value) {
+			        var itemIndex = key + 1;
+			        var selector = '#colSet > div:nth-child(' + itemIndex + ')';
+
+			        var selectedPCodeIndex = $(selector + ' div.ui-select select')[0].selectedIndex;
+			        var pCodeId = $(selector + ' div.ui-select select')[0][selectedPCodeIndex].value;
+			        if (verlofSaldi[selectedPCodeIndex].aanvragenInDagen) {
+			            var aantaluur = $(selector + ' div div.ui-select')[1].children[0].children[1][$(selector + ' div div.ui-select')[1].children[0].children[1].selectedIndex].value;
+
+			            value["prestatiecodeID"] = pCodeId;
+			            value["aantaluur"] = aantaluur;
+			            value["dagID"] = aantaluur;
+			        }else{
+			            var aantaluur = $(selector + ' div div.ui-input-text input')[0].value;
+
+			            if (aantaluur == '' || aantaluur.length != 5)
+			                UurLeegOfNr = true;
+			            value["prestatiecodeID"] = pCodeId;
+			            value["aantaluur"] = aantaluur;
+			            var uren = aantaluur.split(':');
+			            for (i = 0; i < uren.length; i++) {
+			                if (isNaN(uren[i]))
+			                    UurLeegOfNr = true;
+			            }
+			        }
+				});
+
+				// Als niet alles ingevuld werd een melding aan de gebruiker tonen
+				if (UurLeegOfNr) {
+					$('#loadingDivDetailD').css('display', 'none');
+					melding(msgAlleVeldenInvullen, 5000, 'error');
+					enableBijVerlofaanvraag();
+				} else {
+					var gegevens = {
+						startDag: $('#dteVan').val(),
+						eindDag: $('#dteTot').val(),
+						mwid: mdwID, jaar: jaar,
+						sTekst: $('#txaRedenVal').val(),
+						sTaal: taal,
+						jaar: jaar,
+						lijstDagen: DagenVoorVerlofAanvraag
+					};
+					// Gegevens doorsturen naar de API
+					$.ajax({
+						headers: { 'Access-Control-Allow-Origin': "*" },
+						url: url + 'api/VerlofAanvragen/VerlofBevestigen/',
+						cache: false,
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8',
+						data: JSON.stringify(gegevens),
+						success: function (data) {
+							$('#loadingDivDetailD').css('display', 'none');
+							// Een melding geven indien er een probleem was bij het opslaan van de aanvraag
+							if (typeof data == 'string') {
+								$('#txaRedenVal').val(data);
+								if (data.split('@#@').length == 2)
+									melding(data.split('@#@')[1], 10000, data.split('@#@')[0]);
+								else
+									melding(data, 10000, 'error');
+							}
+
+							// Formuliertje leeg maken
+							if (typeof data != 'string') {
+								$('#dteVan').val('');
+								$('#dteTot').val('');
+								$('#txaRedenVal').val('');
+							}
+
+							enableBijVerlofaanvraag();
+
+							// Saldi, historiek en feest-/verlofdagen opnieuw ophalen
+							$('#aHome').click();
+							reloadSaldi();
+							reloadHist();
+							ophalenFeestdagen();
+						}
+					});
+				}
+			}
+
+			// Een melding aan de gebruiker meegeven
+			// Bericht = tekst in de melding
+			// fadeDelay = tijd dat het bericht zichtbaar is
+			// status = wat voor soort melding is het? error (rood), warning (geel), success (groen)
+			function melding(bericht, fadeDelay, status) {
+				switch (status) {
+					case "error":
+						$('.melding').css('background-color', '#ff5757');
+						break;
+					case "warning":
+						$('.melding').css('background-color', '#ffdd57');
+						break;
+					case "success":
+						$('.melding').css('background-color', '#57dd57');
+						break;
+				}
+				$('.melding').text(bericht);
+				$('.melding').fadeIn();
+				window.clearTimeout(timeout);
+				timeout = setTimeout(function () { $('.melding').fadeOut(); }, fadeDelay);
+			}
+
+			// Melding verbergen wanneer er op geklikt wordt
+			function hideMelding() {
+				clearTimeout(timeout);
+				$('.melding').fadeOut();
+			}
+
+			// De gebruiker logt uit
+			function logout() {
+				window.localStorage.removeItem("mdwID");
+				window.localStorage.removeItem("miRol");
+				window.location.href = "index.html#login";
+			}
+
+			function disableBijVerlofaanvraag() {
+				try {
+					// Verlof aanvragen
+					$('#btnDetailDagen').button("disable");
+					$('#btnDetailDagen').parent().css('color', '#aaa').css('background-color', '#ddd').css('cursor', 'default');
+				} catch (ex) { }
+				try {
+					// Verlof bevestigen
+					$('#btnDagenBevestigen').button("disable");
+					$('#btnDagenBevestigen').parent().css('color', '#aaa').css('background-color', '#ddd').css('cursor', 'default');
+				} catch (ex) { }
+				try {
+					// Behandelen
+					$('input[value="Behandelen"]').button("disable");
+					$('input[value="Behandelen"]').parent().css('color', '#aaa').css('background-color', '#ddd').css('cursor', 'default');
+				} catch (ex) { }
+			}
+			function enableBijVerlofaanvraag() {
+				try {
+					// Verlof aanvragen
+					$('#btnDetailDagen').button("enable");
+					$('#btnDetailDagen').parent().css('color', '').css('background-color', '').css('cursor', 'pointer');
+				} catch (ex) { }
+				try {
+					// Verlof bevestigen
+					$('#btnDagenBevestigen').button("enable");
+					$('#btnDagenBevestigen').parent().css('color', '').css('background-color', '').css('cursor', 'pointer');
+				} catch (ex) { }
+				try {
+					// Behandelen
+					$('input[value="Behandelen"]').button("enable");
+					$('input[value="Behandelen"]').parent().css('color', '').css('background-color', '').css('cursor', 'pointer');
+				} catch (ex) { }
+			}
+
+			$(window).on("orientationchange", function (event) {
+				if (event.orientation == 'landscape') {
+					$('.confContent').css('width', '').css('margin', '');
+					$('#divConfAanvrYes').css('display', '').css('float', '');
+					$('#divConfAanvrNo').css('display', '').css('float', '');
+				} else {
+					$('.confContent').css('width', '175px').css('margin', '-100px 0 0 -107px');
+					$('#divConfAanvrYes').css('display', 'block').css('float', 'none');
+					$('#divConfAanvrNo').css('display', 'block').css('float', 'none');
+				}
+			});
+		</script>
+		<script src="js/BehandelenAanvragen.js"></script>
+    </body>
+</html>
